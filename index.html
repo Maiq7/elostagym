@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="de" x-data="{ collapsed: false }">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Osta Gym</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    body { font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif; }
+  </style>
+   <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body class="bg-white text-black scroll-smooth">
+
+  <!-- Header -->
+  <header class="absolute top-0 left-0 w-full z-50 bg-transparent text-white">
+    <div class="max-w-7xl mx-auto flex items-center justify-between"></div>
+<!-- Mobile-Menü: nur sichtbar auf kleinen Geräten -->
+<div x-show="collapsed"
+     x-transition:enter="transition ease-out duration-300"
+     x-transition:enter-start="-translate-x-full opacity-0"
+     x-transition:enter-end="translate-x-0 opacity-100"
+     x-transition:leave="transition ease-in duration-200"
+     x-transition:leave-start="translate-x-0 opacity-100"
+     x-transition:leave-end="-translate-x-full opacity-0"
+     class="fixed top-0 left-0 z-50 w-64 h-full bg-white shadow-lg p-6 md:hidden">
+
+  <!-- Close button (optional) -->
+  <button @click="collapsed = false" class="mb-6 text-gray-600 hover:text-sky-300">
+    ✕ Menü schließen
+  </button>
+
+  <!-- Links -->
+  <nav class="flex flex-col space-y-4 text-gray-800 text-lg font-medium">
+    <a href="index.html" @click="collapsed = false" class="hover:text-sky-300">Home</a>
+    <a href="preise.html" @click="collapsed = false" class="hover:text-sky-300">Preise</a>
+    <a href="tbb.html" @click="collapsed = false" class="hover:text-sky-300">Studio Tauberbischofsheim</a>
+    <a href="lauda.html" @click="collapsed = false" class="hover:text-sky-300">Studio Lauda</a>
+  </nav>
+</div>
+
+
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+   <!-- Linke Gruppe: Button + Navigation -->
+    <div class="flex items-center gap-2">
+   <!-- Toggle Button -->
+<button @click="collapsed = !collapsed"
+        class="w-8 h-8 flex items-center justify-center text-white focus:outline-none">
+
+  <!-- Icon: Mobile-Version (nur sichtbar < md) -->
+  <template x-if="!collapsed">
+    <svg class="w-6 h-6 md:hidden" fill="none" stroke="currentColor" stroke-width="2"
+         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Hamburger-Icon -->
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </template>
+  <template x-if="collapsed">
+    <svg class="w-6 h-6 md:hidden" fill="none" stroke="currentColor" stroke-width="2"
+         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <!-- X-Icon -->
+      <path d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </template>
+
+  <!-- Icon: Desktop-Version (immer sichtbar ab md) -->
+  <svg class="w-6 h-6 hidden md:block" fill="none" stroke="currentColor" stroke-width="2"
+       viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+    <!-- X-Icon dauerhaft für Desktop -->
+    <path d="M6 18L18 6M6 6l12 12" />
+  </svg>
+</button>
+
+
+      <!-- Desktop-Navigation -->
+      <nav x-show="!collapsed"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 -translate-x-4"
+           x-transition:enter-end="opacity-100 translate-x-0"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 translate-x-0"
+           x-transition:leave-end="opacity-0 -translate-x-4"
+           class="hidden md:flex space-x-10 text-base font-medium">
+        <a href="index.html" class="text-white hover:text-sky-300">Home</a>
+        <a href="preise.html" class="text-white hover:text-sky-300">Preise</a>
+        <a href="tbb.html" class="text-white hover:text-sky-300">Studio Tauberbischofsheim</a>
+        <a href="lauda.html" class="text-white hover:text-sky-300">Studio Lauda</a>
+      </nav>
+    </div>
+
+    <!-- Rechte Gruppe: Logo -->
+    <div class="flex-shrink-0">
+      <a href="index.html">
+        <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
+      </a>
+    </div>
+
+  </div>
+</header>
+
+
+
+<section class="relative h-[70vh] bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), #000), url('img/main.png');">
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/3"></div>
+
+  <!-- Inhalt -->
+ <div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-8 text-white">
+
+    <!-- Großer weißer Rahmen -->
+    <div class="border-4 border-white rounded-2xl p-8 md:p-12 bg-black/40 shadow-2xl max-w-xl w-full relative">
+
+      <!-- Kleiner blauer Kasten (innen, zentriert) -->
+      <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-sky-300 text-black px-4 py-2 rounded-full shadow-md text-sm md:text-base font-medium">
+        Werde jetzt Mitglied!
+      </div>
+
+      <!-- Abstand zum oberen Kasten -->
+      <div class="mt-8 mb-6">
+        <span class="text-base md:text-lg font-light mt-1 text-white">ab </span>
+        <span class="text-6xl md:text-8xl font-extrabold text-white">39€</span>
+        <div class="text-base md:text-lg font-light mt-1 text-white">monatlich</div>
+      </div>
+
+     <!-- Buttons -->
+<div class="flex flex-col md:flex-row gap-4 items-center justify-center w-full">
+  <a href="tbb.html"
+     class="w-64 text-center bg-white text-black px-6 py-3 rounded-xl font-semibold text-lg hover:bg-gray-200 transition shadow-md">
+    Studio Tauberbischofsheim
+  </a>
+  <a href="lauda.html"
+     class="w-64 text-center bg-white text-black px-6 py-3 rounded-xl font-semibold text-lg hover:bg-gray-200 transition shadow-md">
+    Studio Lauda-Königshofen
+  </a>
+</div>
+
+
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+  <!-- Unsere Leistungen: -->
+  <section class="bg-black text-white py-16 px-4">
+    <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Unsere Leistungen</h2>
+    <p class="text-lg text-gray-300 mb-12">Mehr als nur Training – dein Rundum-Erlebnis bei El Osta GYM</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-left">
+
+      <!-- Leistung -->
+      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10m-10 4h6m-9 4h12" />
+        </svg>
+        <h3 class="text-xl font-semibold mb-2">9 Wochen Betreuungskonzept</h3>
+        <p class="text-gray-400 text-sm">Individuelle Begleitung & Trainingspläne für deinen optimalen Start.</p>
+      </div>
+
+      <!-- Leistung -->
+      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V7a2 2 0 00-2-2H6a2 2 0 00-2 2v6m16 0v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16 0H4" />
+        </svg>
+        <h3 class="text-xl font-semibold mb-2">Premium Fitnessgeräte von Technogym</h3>
+        <p class="text-gray-400 text-sm">Trainiere an modernsten Kraft- & Ausdauerstationen.</p>
+      </div>
+
+      <!-- Powerplate -->
+      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553 2.276A1 1 0 0120 13.118V17a1 1 0 01-1 1H5a1 1 0 01-1-1v-3.882a1 1 0 01.447-.842L9 10m3-7v10" />
+        </svg>
+        <h3 class="text-xl font-semibold mb-2">Powerplate</h3>
+        <p class="text-gray-400 text-sm">Vibrationstraining zur Muskelstärkung & Stoffwechselanregung.</p>
+      </div>
+
+      <!-- Solarium -->
+      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m6.364 1.636l-1.414 1.414M21 12h-2m-1.636 6.364l-1.414-1.414M12 21v-2m-6.364-1.636l1.414-1.414M3 12h2m1.636-6.364l1.414 1.414M12 7a5 5 0 100 10 5 5 0 000-10z" />
+        </svg>
+        <h3 class="text-xl font-semibold mb-2">Solarium</h3>
+        <p class="text-gray-400 text-sm">Sonnen & entspannen – mit modernen Lichtsystemen.</p>
+      </div>
+
+      <!-- Sauna -->
+      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7" />
+        </svg>
+        <h3 class="text-xl font-semibold mb-2">Sauna</h3>
+        <p class="text-gray-400 text-sm">Stärke dein Immunsystem & erhole dich nach dem Training.</p>
+      </div>
+
+      <!-- Squash -->
+      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h4a4 4 0 010 8h-4a4 4 0 01-4-4z" />
+        </svg>
+        <h3 class="text-xl font-semibold mb-2">Squash</h3>
+        <p class="text-gray-400 text-sm">Rasanter Spielspaß für Reaktion, Ausdauer & Power.</p>
+      </div>
+
+      <!-- Tennis -->
+      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        <h3 class="text-xl font-semibold mb-2">Tennis</h3>
+        <p class="text-gray-400 text-sm">Trainiere Technik, Kondition & Wettkampfgeist.</p>
+      </div>
+
+    </div>
+  </div>
+  
+  <!-- Unsere Studios -->
+</section>
+<section class="bg-black text-white py-16 px-6">
+  <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-extrabold mb-12">Unsere Studios</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Studio Karte 1 -->
+      <div class="relative rounded-xl overflow-hidden shadow-lg group">
+        <!-- Hintergrundbild -->
+        <div class="h-96 bg-cover bg-center" style="background-image: url('img/main_tbb.jpg');">
+          <!-- Overlay oben: Standort -->
+          <div class="absolute top-0 left-0 bg-sky-300/50 px-4 py-2 text-sm font-semibold rounded-br-xl">
+            Tauberbischofsheim
+          </div>
+
+          <!-- Button unten -->
+          <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+            <a href="tbb.html"
+               class="bg-white text-black px-6 py-2 rounded-lg font-semibold text-sm hover:bg-emerald-300 transition">
+              Zum Studio
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Studio Karte 2 -->
+      <div class="relative rounded-xl overflow-hidden shadow-lg group">
+        <!-- Hintergrundbild -->
+        <div class="h-96 bg-cover bg-center" style="background-image: url('img/main_lauda.jpeg');">
+          <!-- Overlay oben: Standort -->
+          <div class="absolute top-0 left-0 bg-sky-300/50 px-4 py-2 text-sm font-semibold rounded-br-xl">
+            Lauda-Königshofen
+          </div>
+
+          <!-- Button unten -->
+          <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+            <a href="lauda.html"
+               class="bg-white text-black px-6 py-2 rounded-lg font-semibold text-sm hover:bg-emerald-300 transition">
+              Zum Studio
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Das sagen unsere Mitglieder -->
+<section class="bg-black py-16 px-6">
+  <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-10">Das sagen unsere Mitglieder</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+
+      <!-- Bewertung 1 -->
+      <div class="bg-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg transition">
+        <div class="flex items-center mb-4">
+          <img src="https://via.placeholder.com/60" alt="Profilbild" class="w-12 h-12 rounded-full mr-4">
+          <div>
+            <p class="font-semibold text-gray-800">Lisa M.</p>
+            <p class="text-sm text-gray-500">vor 1 Woche</p>
+          </div>
+        </div>
+        <div class="flex items-center text-yellow-400 mb-2">
+          ★★★★★
+        </div>
+        <p class="text-gray-700 text-sm">Top Studio! Die Trainer sind super freundlich und ich fühle mich rundum wohl.</p>
+      </div>
+
+      <!-- Bewertung 2 -->
+      <div class="bg-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg transition">
+        <div class="flex items-center mb-4">
+          <img src="https://via.placeholder.com/60" alt="Profilbild" class="w-12 h-12 rounded-full mr-4">
+          <div>
+            <p class="font-semibold text-gray-800">Sebastian K.</p>
+            <p class="text-sm text-gray-500">vor 2 Wochen</p>
+          </div>
+        </div>
+        <div class="flex items-center text-yellow-400 mb-2">
+          ★★★★★
+        </div>
+        <p class="text-gray-700 text-sm">Super Geräte und das 9-Wochen-Betreuungskonzept ist Gold wert!</p>
+      </div>
+
+      <!-- Bewertung 3 -->
+      <div class="bg-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg transition">
+        <div class="flex items-center mb-4">
+          <img src="https://via.placeholder.com/60" alt="Profilbild" class="w-12 h-12 rounded-full mr-4">
+          <div>
+            <p class="font-semibold text-gray-800">Maik K.</p>
+            <p class="text-sm text-gray-500">vor 4 Tagen</p>
+          </div>
+        </div>
+        <div class="flex items-center text-yellow-400 mb-2">
+          ★★★★★
+        </div>
+        <p class="text-gray-700 text-sm">Modernes Studio mit Power Plate, Solarium und toller Atmosphäre!</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-6 px-4 text-sm text-gray-400">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+  <!-- Rechte Seite: Copyright + Made by -->
+    <div class="text-left">
+      <p>&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
+      <p class="text-xs mt-1">Made by Maik</p>
+    </div>
+        <div class="flex-shrink-0">
+      <a href="index.html">
+        <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
+      </a>
+    </div>
+    <!-- Linke Seite: Menü -->
+    <div class="space-y-2 md:space-y-0 md:space-x-6 md:flex">
+      <a href="impressum.html" class="block hover:text-white">Impressum</a>
+      <a href="datenschutz.html" class="block hover:text-white">Datenschutz</a>
+      <a href="mitgliedschaft.html" class="block hover:text-white">Mitgliedschaft verwalten</a>
+    </div>
+
+  
+
+  </div>
+</footer>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  const swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    loop: true,
+    autoplay: {
+      delay: 3500,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    }
+  });
+</script>
+
+</body>
+</html>

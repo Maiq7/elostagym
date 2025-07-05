@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="de" x-data="{ collapsed: false }">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Osta Gym</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    body { font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif; }
+  </style>
+   <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body class="bg-white text-black scroll-smooth">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between"></div>
+<!-- Mobile-Menü: nur sichtbar auf kleinen Geräten -->
+<div x-show="collapsed"
+     x-transition:enter="transition ease-out duration-300"
+     x-transition:enter-start="-translate-x-full opacity-0"
+     x-transition:enter-end="translate-x-0 opacity-100"
+     x-transition:leave="transition ease-in duration-200"
+     x-transition:leave-start="translate-x-0 opacity-100"
+     x-transition:leave-end="-translate-x-full opacity-0"
+     class="fixed top-0 left-0 z-50 w-64 h-full bg-white shadow-lg p-6 md:hidden">
+
+  <!-- Close button (optional) -->
+  <button @click="collapsed = false" class="mb-6 text-gray-600 hover:text-yellow-500">
+    ✕ Menü schließen
+  </button>
+
+  <!-- Links -->
+  <nav class="flex flex-col space-y-4 text-gray-800 text-lg font-medium">
+    <a href="index.html" @click="collapsed = false" class="hover:text-yellow-500">Home</a>
+    <a href="preise.html" @click="collapsed = false" class="hover:text-yellow-500">Preise</a>
+    <a href="tbb.html" @click="collapsed = false" class="hover:text-yellow-500">Studio Tauberbischofsheim</a>
+    <a href="studio.html" @click="collapsed = false" class="hover:text-yellow-500">Studio Lauda</a>
+  </nav>
+</div>
+
+
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+   <!-- Linke Gruppe: Button + Navigation -->
+    <div class="flex items-center gap-2">
+   <!-- Toggle Button -->
+<button @click="collapsed = !collapsed"
+        class="w-8 h-8 flex items-center justify-center text-gray-700 focus:outline-none">
+
+  <!-- Icon: Mobile-Version (nur sichtbar < md) -->
+  <template x-if="!collapsed">
+    <svg class="w-6 h-6 md:hidden" fill="none" stroke="currentColor" stroke-width="2"
+         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Hamburger-Icon -->
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </template>
+  <template x-if="collapsed">
+    <svg class="w-6 h-6 md:hidden" fill="none" stroke="currentColor" stroke-width="2"
+         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <!-- X-Icon -->
+      <path d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </template>
+
+  <!-- Icon: Desktop-Version (immer sichtbar ab md) -->
+  <svg class="w-6 h-6 hidden md:block" fill="none" stroke="currentColor" stroke-width="2"
+       viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+    <!-- X-Icon dauerhaft für Desktop -->
+    <path d="M6 18L18 6M6 6l12 12" />
+  </svg>
+</button>
+
+
+      <!-- Desktop-Navigation -->
+      <nav x-show="!collapsed"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 -translate-x-4"
+           x-transition:enter-end="opacity-100 translate-x-0"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 translate-x-0"
+           x-transition:leave-end="opacity-0 -translate-x-4"
+           class="hidden md:flex space-x-4 text-base font-medium">
+        <a href="index.html" class="text-gray-800 hover:text-yellow-500">Home</a>
+        <a href="preise.html" class="text-gray-800 hover:text-yellow-500">Preise</a>
+        <a href="tbb.html" class="text-gray-800 hover:text-yellow-500">Studio Tauberbischofsheim</a>
+        <a href="lauda.html" class="text-gray-800 hover:text-yellow-500">Studio Lauda</a>
+      </nav>
+    </div>
+
+    <!-- Rechte Gruppe: Logo -->
+    <div class="flex-shrink-0">
+      <a href="index.html">
+        <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
+      </a>
+    </div>
+
+  </div>
+</header>
+
+
+
+  <!-- Hero Section -->
+<section class="relative h-[90vh] bg-cover bg-center" style="background-image: url('img/titelbild.jpeg');">
+  <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent z-10"></div>
+  <div class="absolute inset-0 bg-black/60 z-0"></div>
+  <div class="relative z-20 h-full flex items-center justify-center text-center px-4">
+    <div>
+      <h2 class="text-4xl md:text-6xl font-extrabold text-white">Werde fit. Bleib stark.</h2>
+      <p class="mt-4 text-lg md:text-xl text-white">Melde dich noch heute an!</p>
+      <a href="#angebot" class="mt-6 inline-block bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition">
+        Jetzt anmelden
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- Was Sie bei uns in Lauda erwartet: -->
+  <section class="py-20">
+  <div class="container mx-auto px-6">
+    <h2 class="text-3xl font-bold text-black text-center mb-12">Was Sie bei uns in Lauda erwartet</h2>
+    <h4 class="text-3xl font-bold text-black text-center mb-12">PREMIUM-FITNESS FÜR ALLE !</h4>
+    <div class="w-24 h-1 bg-black mx-auto mb-12"></div>
+
+
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+
+        <!-- Slide 1 -->
+        <div class="swiper-slide bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+          <img src="img/selection-pro.jpg" alt="Selection Pro" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-white font-semibold text-lg">Krafttraining mit Selection Pro Serie von Technogym</h3>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="swiper-slide bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+          <img src="img/pure-strength.jpg" alt="Pure Strength" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-white font-semibold text-lg">Krafttraining mit Pure Strength Serie von Technogym</h3>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="swiper-slide bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+          <img src="img/power-plate.jpg" alt="Power Plate" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-white font-semibold text-lg">POWER PLATE - DER 10 Minuten Erfolg</h3>
+          </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="swiper-slide bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+          <img src="img/ausdauer.jpg" alt="Ausdauertraining" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-white font-semibold text-lg">Ausdauer-Training</h3>
+          </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="swiper-slide bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+          <img src="img/freihantel.jpg" alt="Freihanteltraining" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-white font-semibold text-lg">Freihantel-Training</h3>
+          </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="swiper-slide bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+          <img src="img/solarium.jpg" alt="Solarium" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-white font-semibold text-lg">Solarium 10 Min für 7 €</h3>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pfeile -->
+      <div class="swiper-button-next text-bg-white"></div>
+      <div class="swiper-button-prev text-bg-white"></div>
+    </div>
+  </div>
+</section>
+
+  <!-- Zufriedenheit Garantiert-->
+<section class="text-black text-center py-20">
+  <div class="container mx-auto px-6 max-w-3xl">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Zufriedenheit garantiert</h2>
+    <h3 class="text-lg md:text-xl font-medium text-black mb-6">
+      Ob Kraft- oder Ausdauertraining, mit unserer Hilfe ist der Trainingserfolg sicher.
+    </h3>
+    <div class="w-24 h-1 bg-black mx-auto mb-12"></div>
+  </div>
+  <div class="relative w-full">
+    <img src="img/bottom.jpg" alt="Motivation" class="w-full h-[60vh] object-cover">
+    <div class="absolute inset-0 flex items-center justify-center bg-black/40">
+      <p class="text-white text-xl md:text-2xl font-semibold text-center px-4">
+        Wir helfen Ihnen, das Beste aus sich selbst herauszuholen
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Adressen-->
+<section class="text-black py-20">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row justify-center gap-12 text-center md:text-left">
+
+      <!-- Standort 1: Lauda-Königshofen -->
+      <div class="flex-1">
+        <h3 class="text-xl font-bold mb-4">El Osta GYM Lauda-Königshofen</h3>
+        <p>i-Park Tauberfranken 6<br>97922 Lauda-Königshofen</p>
+        <p class="mt-4">TEL: <a href="tel:+4993435091680" class="text-black hover:underline">09343-5091680</a></p>
+        <p class="mt-1">E-Mail: <a href="mailto:info@elostagym.de" class="text-gray-800 hover:underline">info@elostagym.de</a></p>
+        <div class="mt-4">
+          <p>Mo, Di, Do, Fr.: 9:30 – 21:00</p>
+          <p>Mittwoch: 16:00 – 21:00</p>
+          <p>Sa–So & Feiertage: 10:00 – 15:00</p>
+        </div>
+      </div>
+
+      <!-- Standort 2: Tauberbischofsheim -->
+      <div class="flex-1">
+        <h3 class="text-xl font-bold mb-4">El Osta GYM Tauberbischofsheim</h3>
+        <p>Am Bild 39<br>97941 Tauberbischofsheim</p>
+        <p class="mt-4">TEL: <a href="tel:+4993417040" class="text-black hover:underline">+49 9341 7040</a></p>
+        <p class="mt-1">E-Mail: <a href="mailto:info@elostagym.de" class="text-gray-800 hover:underline">info@elostagym.de</a></p>
+        <div class="mt-4">
+          <p>Mo - Fr.: 9:30 – 21:00</p>
+          <p>Sa–So & Feiertage: 10:00 – 15:00</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-6 px-4 text-sm text-gray-400">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+  <!-- Rechte Seite: Copyright + Made by -->
+    <div class="text-left">
+      <p>&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
+      <p class="text-xs mt-1">Made by Maik</p>
+    </div>
+        <div class="flex-shrink-0">
+      <a href="index.html">
+        <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
+      </a>
+    </div>
+    <!-- Linke Seite: Menü -->
+    <div class="space-y-2 md:space-y-0 md:space-x-6 md:flex">
+      <a href="impressum.html" class="block hover:text-white">Impressum</a>
+      <a href="datenschutz.html" class="block hover:text-white">Datenschutz</a>
+      <a href="mitgliedschaft.html" class="block hover:text-white">Mitgliedschaft verwalten</a>
+    </div>
+
+  
+
+  </div>
+</footer>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  const swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    loop: true,
+    autoplay: {
+      delay: 3500,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    }
+  });
+</script>
+
+</body>
+</html>

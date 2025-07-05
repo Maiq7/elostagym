@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="de" x-data="{ collapsed: false }">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Osta Gym</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    body { font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif; }
+  </style>
+   <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body class="bg-white text-black scroll-smooth">
+
+  <!-- Header -->
+  <header class="absolute top-0 left-0 w-full z-50 bg-transparent text-white">
+    <div class="max-w-7xl mx-auto flex items-center justify-between"></div>
+<!-- Mobile-Menü: nur sichtbar auf kleinen Geräten -->
+<div x-show="collapsed"
+     x-transition:enter="transition ease-out duration-300"
+     x-transition:enter-start="-translate-x-full opacity-0"
+     x-transition:enter-end="translate-x-0 opacity-100"
+     x-transition:leave="transition ease-in duration-200"
+     x-transition:leave-start="translate-x-0 opacity-100"
+     x-transition:leave-end="-translate-x-full opacity-0"
+     class="fixed top-0 left-0 z-50 w-64 h-full bg-white shadow-lg p-6 md:hidden">
+
+  <!-- Close button (optional) -->
+  <button @click="collapsed = false" class="mb-6 text-gray-600 hover:text-sky-300">
+    ✕ Menü schließen
+  </button>
+
+  <!-- Links -->
+  <nav class="flex flex-col space-y-4 text-gray-800 text-lg font-medium">
+    <a href="index.html" @click="collapsed = false" class="hover:text-sky-300">Home</a>
+    <a href="preise.html" @click="collapsed = false" class="hover:text-sky-300">Preise</a>
+    <a href="tbb.html" @click="collapsed = false" class="hover:text-sky-300">Studio Tauberbischofsheim</a>
+    <a href="lauda.html" @click="collapsed = false" class="hover:text-sky-300">Studio Lauda</a>
+  </nav>
+</div>
+
+
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+   <!-- Linke Gruppe: Button + Navigation -->
+    <div class="flex items-center gap-2">
+   <!-- Toggle Button -->
+<button @click="collapsed = !collapsed"
+        class="w-8 h-8 flex items-center justify-center text-white focus:outline-none">
+
+  <!-- Icon: Mobile-Version (nur sichtbar < md) -->
+  <template x-if="!collapsed">
+    <svg class="w-6 h-6 md:hidden" fill="none" stroke="currentColor" stroke-width="2"
+         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Hamburger-Icon -->
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </template>
+  <template x-if="collapsed">
+    <svg class="w-6 h-6 md:hidden" fill="none" stroke="currentColor" stroke-width="2"
+         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <!-- X-Icon -->
+      <path d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </template>
+
+  <!-- Icon: Desktop-Version (immer sichtbar ab md) -->
+  <svg class="w-6 h-6 hidden md:block" fill="none" stroke="currentColor" stroke-width="2"
+       viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+    <!-- X-Icon dauerhaft für Desktop -->
+    <path d="M6 18L18 6M6 6l12 12" />
+  </svg>
+</button>
+
+
+      <!-- Desktop-Navigation -->
+      <nav x-show="!collapsed"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 -translate-x-4"
+           x-transition:enter-end="opacity-100 translate-x-0"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 translate-x-0"
+           x-transition:leave-end="opacity-0 -translate-x-4"
+           class="hidden md:flex space-x-10 text-base font-medium">
+        <a href="index.html" class="text-white hover:text-sky-300">Home</a>
+        <a href="preise.html" class="text-white hover:text-sky-300">Preise</a>
+        <a href="tbb.html" class="text-white hover:text-sky-300">Studio Tauberbischofsheim</a>
+        <a href="lauda.html" class="text-white hover:text-sky-300">Studio Lauda</a>
+      </nav>
+    </div>
+
+    <!-- Rechte Gruppe: Logo -->
+    <div class="flex-shrink-0">
+      <a href="index.html">
+        <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
+      </a>
+    </div>
+
+  </div>
+</header>
+
+
+
+<section class="relative h-[70vh] bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), #000), url('img/main.png');">
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/3"></div>
+ <!-- Inhalt -->
+ <div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-8 text-white">
+
+   
+
+      <!-- Abstand zum oberen Kasten -->
+      <div class="mt-8 mb-6">
+        <span class="text-6xl md:text-8xl font-extrabold text-white">Angebot</span>
+      </div>
+
+
+    </div>
+
+</section>
+<section class="bg-white text-black py-16 px-4" x-data="{ step: 1, vorname: '', nachname: '', email: '', telefon: '', standort: '', dsgvo: false }">
+  <div class="max-w-3xl mx-auto text-center">
+
+    <!-- Fortschrittsanzeige -->
+    <div class="flex items-center justify-center space-x-4 mb-12">
+      <template x-for="s in [1,2,3]">
+        <div class="flex items-center">
+          <div :class="{
+                  'bg-sky-300 text-black': step === s,
+                  'bg-gray-200 text-gray-600': step !== s
+                }"
+              class="w-10 h-10 rounded-full font-bold flex items-center justify-center">
+            <span x-text="s"></span>
+          </div>
+          <template x-if="s < 3">
+            <div class="w-10 h-0.5 bg-gray-300 mx-2"></div>
+          </template>
+        </div>
+      </template>
+    </div>
+
+    <!-- Schritt 1: Mitgliedschaft -->
+    <div x-show="step === 1" x-transition class="bg-sky-300 rounded-xl shadow-lg p-8 relative">
+      <h2 class="text-3xl font-bold mb-4">1 Jahresvertrag – <span class="text-black">39 €</span></h2>
+      <p class="text-lg mb-6">Sichere dir jetzt dein unverbindliches Angebot</p>
+      <button @click="step = 2"
+              class="mt-6 bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition">
+        Weiter zu deinen Daten
+      </button>
+    </div>
+
+    <!-- Schritt 2: Daten -->
+    <div x-show="step === 2" x-transition class="bg-gray-100 rounded-xl shadow-lg p-8 text-left space-y-4">
+      <h2 class="text-xl font-bold text-center mb-6">Deine Daten</h2>
+      <input x-model="vorname" type="text" placeholder="Vorname" class="w-full px-4 py-2 border rounded" required>
+      <input x-model="nachname" type="text" placeholder="Nachname" class="w-full px-4 py-2 border rounded" required>
+      <input x-model="telefon" type="tel" placeholder="Telefonnummer" class="w-full px-4 py-2 border rounded" required>
+      <input x-model="email" type="email" placeholder="E-Mail" class="w-full px-4 py-2 border rounded" required>
+
+      <select x-model="standort" required class="w-full px-4 py-2 border rounded">
+        <option value="" disabled selected>Bevorzugter Standort wählen</option>
+        <option>Tauberbischofsheim</option>
+        <option>Lauda-Königshofen</option>
+      </select>
+
+      <label class="flex items-start text-sm text-gray-700">
+        <input type="checkbox" x-model="dsgvo" required class="mr-2 mt-1">
+        Ich stimme der Verarbeitung meiner Daten gemäß der <a href="datenschutz.html" class="underline text-sky-400">Datenschutzerklärung</a> zu.
+      </label>
+
+      <div class="flex justify-between mt-6">
+        <button @click="step = 1"
+                class="bg-gray-300 text-black px-6 py-2 rounded-xl font-medium hover:bg-gray-400">
+          Zurück
+        </button>
+        <button :disabled="!vorname || !nachname || !email || !telefon || !standort || !dsgvo"
+                @click="step = 3"
+                class="bg-sky-300 text-black px-6 py-2 rounded-xl font-semibold hover:bg-sky-200 transition">
+          Weiter zur Bestätigung
+        </button>
+      </div>
+    </div>
+
+    <!-- Schritt 3: Bestätigung -->
+    <div x-show="step === 3" x-transition class="bg-emerald-100 rounded-xl shadow-lg p-8 text-center">
+      <h2 class="text-2xl font-bold mb-4 text-emerald-700">Vielen Dank!</h2>
+      <p class="text-gray-700 mb-4">Deine Daten wurden vorgemerkt:</p>
+      <ul class="text-sm text-gray-800 text-left max-w-md mx-auto space-y-1">
+        <li><strong>Vorname:</strong> <span x-text="vorname"></span></li>
+        <li><strong>Nachname:</strong> <span x-text="nachname"></span></li>
+        <li><strong>Telefon:</strong> <span x-text="telefon"></span></li>
+        <li><strong>E-Mail:</strong> <span x-text="email"></span></li>
+        <li><strong>Standort:</strong> <span x-text="standort"></span></li>
+      </ul>
+      <p class="mt-6 text-sm text-gray-600">Du wirst in Kürze weitergeleitet oder erhältst Rückmeldung.</p>
+      <a href="angebot.html"
+         class="inline-block mt-6 bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
+        Zur Angebotsseite
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-6 px-4 text-sm text-gray-400">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+  <!-- Rechte Seite: Copyright + Made by -->
+    <div class="text-left">
+      <p>&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
+      <p class="text-xs mt-1">Made by Maik</p>
+    </div>
+        <div class="flex-shrink-0">
+      <a href="index.html">
+        <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
+      </a>
+    </div>
+    <!-- Linke Seite: Menü -->
+    <div class="space-y-2 md:space-y-0 md:space-x-6 md:flex">
+      <a href="impressum.html" class="block hover:text-white">Impressum</a>
+      <a href="datenschutz.html" class="block hover:text-white">Datenschutz</a>
+      <a href="mitgliedschaft.html" class="block hover:text-white">Mitgliedschaft verwalten</a>
+    </div>
+
+  
+
+  </div>
+</footer>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  const swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    loop: true,
+    autoplay: {
+      delay: 3500,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    }
+  });
+</script>
+
+</body>
+</html>
