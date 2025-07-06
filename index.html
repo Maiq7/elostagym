@@ -6,11 +6,15 @@
   <title>El Osta Gym</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
   <style>
     body { font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif; }
+    
   </style>
    <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+
 </head>
 <body class="bg-white text-black scroll-smooth">
 
@@ -146,133 +150,304 @@
 
 
 
+<!-- Unsere Leistungen -->
+<section class="bg-black text-white py-16 px-4" 
+         x-data="{ 
+           active: null, 
+           currentSlide: 0, 
+           slides: [
+             { img: 'img/selection-pro.jpg', title: '9 Wochen Betreuung' },
+             { img: 'img/pure-strength.jpg', title: 'Technogym Geräte' },
+             { img: 'img/power-plate.jpg', title: 'Powerplate' },
+             { img: 'img/solarium.jpg', title: 'Solarium' },
+             { img: 'img/freihantel.jpg', title: 'Sauna' },
+             { img: 'img/logo.png', title: 'Squash' },
+             { img: 'img/preis.jpg', title: 'Tennis' }
+           ] 
+         }" 
+         x-init="setInterval(() => currentSlide = (currentSlide + 1) % slides.length, 3000)">
+    <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>     
+  <div class="max-w-7xl mx-auto">
+    
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">Unsere Leistungen</h2>
 
-  <!-- Unsere Leistungen: -->
-  <section class="bg-black text-white py-16 px-4">
-    <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
-  <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Unsere Leistungen</h2>
-    <p class="text-lg text-gray-300 mb-12">Mehr als nur Training – dein Rundum-Erlebnis bei El Osta GYM</p>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-left">
-
-      <!-- Leistung -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10m-10 4h6m-9 4h12" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">9 Wochen Betreuungskonzept</h3>
-        <p class="text-gray-400 text-sm">Individuelle Begleitung & Trainingspläne für deinen optimalen Start.</p>
+    <!-- Flex-Layout -->
+    <div class="flex flex-col md:flex-row gap-8 md:items-stretch">
+      
+      <!-- ✅ Slider zuerst = links -->
+      <div class="relative w-full md:w-1/3 overflow-hidden rounded-xl shadow-lg"
+           x-init="$nextTick(() => {
+             const accordion = document.getElementById('accordion-column');
+             if (accordion) {
+               $el.style.height = accordion.offsetHeight + 'px';
+             }
+           })">
+        <template x-for="(slide, index) in slides" :key="index">
+          <div x-show="currentSlide === index"
+               x-transition:enter="transform transition ease-out duration-500"
+               x-transition:enter-start="translate-x-full opacity-0"
+               x-transition:enter-end="translate-x-0 opacity-100"
+               x-transition:leave="transform transition ease-in duration-500"
+               x-transition:leave-start="translate-x-0 opacity-100"
+               x-transition:leave-end="-translate-x-full opacity-0"
+               x-cloak
+               class="absolute inset-0 w-full h-full">
+            <img :src="slide.img" alt="" class="w-full h-full object-cover rounded-xl">
+            <div class="absolute bottom-0 left-0 w-full bg-black/70 text-center py-2 text-white text-lg font-semibold">
+              <span x-text="slide.title"></span>
+            </div>
+          </div>
+        </template>
       </div>
 
-      <!-- Leistung -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V7a2 2 0 00-2-2H6a2 2 0 00-2 2v6m16 0v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16 0H4" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Premium Fitnessgeräte von Technogym</h3>
-        <p class="text-gray-400 text-sm">Trainiere an modernsten Kraft- & Ausdauerstationen.</p>
-      </div>
+      <!-- ✅ Accordion danach = rechts -->
+      <div class="w-full md:w-2/3 space-y-4" id="accordion-column">
+        <template x-for="(item, i) in [
+          { title: '9 Wochen Betreuungskonzept', content: 'Individuelle Trainingsbegleitung und Check-ups in den ersten 9 Wochen.' },
+          { title: 'Premium Fitnessgeräte von Technogym', content: 'Trainiere mit den hochwertigsten Geräten Europas.' },
+          { title: 'Powerplate', content: 'Effektives Vibrationstraining für Muskelstimulation und Regeneration.' },
+          { title: 'Solarium', content: 'Moderne Solarien für gesundes Bräunen & Entspannung.' },
+          { title: 'Sauna', content: 'Stärkt dein Immunsystem und hilft dir zu regenerieren.' },
+          { title: 'Squash', content: 'Reaktionsschnelles Ausdauertraining mit Spaßfaktor.' },
+          { title: 'Tennis', content: 'Trainiere deine Technik, Konzentration & Power auf dem Platz.' }
+        ]" :key="i">
+          <div class="border border-gray-700 rounded-xl overflow-hidden">
+            <button @click="active === i ? active = null : active = i"
+                    class="w-full text-left px-6 py-4 flex justify-between items-center bg-gray-800 hover:bg-gray-700">
+              <span class="font-medium" x-text="item.title"></span>
+              <span class="text-xl font-bold" x-text="active === i ? '−' : '+'"></span>
+            </button>
+            <div x-show="active === i" x-transition x-cloak class="px-6 pb-4 pt-2 text-gray-300 text-sm">
+              <p x-text="item.content"></p>
+            </div>
+          </div>
+        </template>
 
-      <!-- Powerplate -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553 2.276A1 1 0 0120 13.118V17a1 1 0 01-1 1H5a1 1 0 01-1-1v-3.882a1 1 0 01.447-.842L9 10m3-7v10" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Powerplate</h3>
-        <p class="text-gray-400 text-sm">Vibrationstraining zur Muskelstärkung & Stoffwechselanregung.</p>
+        <!-- CTA Button -->
+        <div class="text-center md:text-left mt-6">
+          <a href="angebot.html"
+             class="inline-block bg-sky-300 text-black px-8 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
+            Angebot sichern
+          </a>
+        </div>
       </div>
-
-      <!-- Solarium -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m6.364 1.636l-1.414 1.414M21 12h-2m-1.636 6.364l-1.414-1.414M12 21v-2m-6.364-1.636l1.414-1.414M3 12h2m1.636-6.364l1.414 1.414M12 7a5 5 0 100 10 5 5 0 000-10z" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Solarium</h3>
-        <p class="text-gray-400 text-sm">Sonnen & entspannen – mit modernen Lichtsystemen.</p>
-      </div>
-
-      <!-- Sauna -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Sauna</h3>
-        <p class="text-gray-400 text-sm">Stärke dein Immunsystem & erhole dich nach dem Training.</p>
-      </div>
-
-      <!-- Squash -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h4a4 4 0 010 8h-4a4 4 0 01-4-4z" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Squash</h3>
-        <p class="text-gray-400 text-sm">Rasanter Spielspaß für Reaktion, Ausdauer & Power.</p>
-      </div>
-
-      <!-- Tennis -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Tennis</h3>
-        <p class="text-gray-400 text-sm">Trainiere Technik, Kondition & Wettkampfgeist.</p>
-      </div>
-
     </div>
   </div>
+</section>
+
+
   
   <!-- Unsere Studios -->
-</section>
 <section class="bg-black text-white py-16 px-6">
   <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+  
   <div class="max-w-6xl mx-auto text-center">
     <h2 class="text-3xl md:text-4xl font-extrabold mb-12">Unsere Studios</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+  <!-- Studio Karte 1 -->
+  <div class="relative rounded-xl overflow-hidden shadow-lg group h-[40rem]">
+    <!-- Hintergrundbild -->
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/main_tbb.jpg');"></div>
+
+    <!-- Standortname oben zentriert mit halbtransparentem Hintergrund -->
+    <div class="absolute top left-1/2 transform -translate-x-1/2">
+      <div class="bg-sky-300/50 text-white text-xl md:text-2xl font-bold px-6 py-3 rounded-lg text-center">
+        Tauberbischofsheim
+      </div>
+    </div>
+
+    <!-- Button unten -->
+    <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+      <a href="tbb.html"
+         class="bg-white text-black px-6 py-2 rounded-lg font-semibold text-sm hover:bg-emerald-300 transition">
+        Zum Studio
+      </a>
+    </div>
+  </div>
+
+  <!-- Studio Karte 2 -->
+  <div class="relative rounded-xl overflow-hidden shadow-lg group h-[40rem]">
+    <!-- Hintergrundbild -->
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/main_lauda.jpeg');"></div>
+
+    <!-- Standortname oben zentriert mit halbtransparentem Hintergrund -->
+    <div class="absolute top left-1/2 transform -translate-x-1/2">
+      <div class="bg-sky-300/50 text-white text-xl md:text-2xl font-bold px-6 py-3 rounded-lg text-center">
+        Lauda-Königshofen
+      </div>
+    </div>
+
+    <!-- Button unten -->
+    <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+      <a href="lauda.html"
+         class="bg-white text-black px-6 py-2 rounded-lg font-semibold text-sm hover:bg-emerald-300 transition">
+        Zum Studio
+      </a>
+    </div>
+  </div>
+
+</div>
+
+
+  </div>
+</section>
+
+<!-- FAQ-Einträge -->
+<section class="bg-black text-white py-16 px-4" x-data="{ open: null }">
+  <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-10">Häufig gestellte Fragen</h2>
+
+    
+    <div class="space-y-4 text-black">
       
-      <!-- Studio Karte 1 -->
-      <div class="relative rounded-xl overflow-hidden shadow-lg group">
-        <!-- Hintergrundbild -->
-        <div class="h-96 bg-cover bg-center" style="background-image: url('img/main_tbb.jpg');">
-          <!-- Overlay oben: Standort -->
-          <div class="absolute top-0 left-0 bg-sky-300/50 px-4 py-2 text-sm font-semibold rounded-br-xl">
-            Tauberbischofsheim
-          </div>
-
-          <!-- Button unten -->
-          <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-            <a href="tbb.html"
-               class="bg-white text-black px-6 py-2 rounded-lg font-semibold text-sm hover:bg-emerald-300 transition">
-              Zum Studio
-            </a>
-          </div>
+      <!-- Frage 1 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 1 ? open = null : open = 1"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Wie genau läuft die Aktion ab?</span>
+          <span class="text-xl font-bold" x-text="open === 1 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 1" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Du meldest dich unverbindlich über das Formular an, wir reservieren dein Angebot und beraten dich persönlich bei deinem ersten Studiobesuch. Danach entscheidest du, ob du starten möchtest.
         </div>
       </div>
 
-      <!-- Studio Karte 2 -->
-      <div class="relative rounded-xl overflow-hidden shadow-lg group">
-        <!-- Hintergrundbild -->
-        <div class="h-96 bg-cover bg-center" style="background-image: url('img/main_lauda.jpeg');">
-          <!-- Overlay oben: Standort -->
-          <div class="absolute top-0 left-0 bg-sky-300/50 px-4 py-2 text-sm font-semibold rounded-br-xl">
-            Lauda-Königshofen
-          </div>
-
-          <!-- Button unten -->
-          <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-            <a href="lauda.html"
-               class="bg-white text-black px-6 py-2 rounded-lg font-semibold text-sm hover:bg-emerald-300 transition">
-              Zum Studio
-            </a>
-          </div>
+      <!-- Frage 2 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 2 ? open = null : open = 2"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Was kann ich alles nutzen?</span>
+          <span class="text-xl font-bold" x-text="open === 2 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 2" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Du hast Zugang zu allen Fitnessgeräten, der PowerPlate, dem Solarium, den Kursen sowie unserer Sauna. Alles ist im Aktionszeitraum inklusive.
         </div>
       </div>
 
+      <!-- Frage 3 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 3 ? open = null : open = 3"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Kann ich in allen EL OSTA Studios trainieren?</span>
+          <span class="text-xl font-bold" x-text="open === 3 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 3" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Nein. Dieses Angebot gilt exklusiv für unsere Studios in Tauberbischofsheim und Lauda-Königshofen.
+        </div>
+      </div>
+
+      <!-- Frage 4 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 4 ? open = null : open = 4"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Welche Highlights gibt es noch?</span>
+          <span class="text-xl font-bold" x-text="open === 4 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 4" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Unsere Highlights: Technogym Premiumgeräte, individuell betreute Trainingspläne, Squash- und Tennisbereiche, Powerplate-Training und mehr!
+        </div>
+      </div>
+
+      <!-- Frage 5 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 5 ? open = null : open = 5"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Wie kann ich meinen Club testen?</span>
+          <span class="text-xl font-bold" x-text="open === 5 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 5" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Fülle einfach das Formular aus – wir melden uns und vereinbaren einen unverbindlichen Beratungstermin, bei dem du das Studio kennenlernen kannst.
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA-Button -->
+    <div class="text-center mt-10">
+      <a href="angebot.html"
+         class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
+        Jetzt sichern
+      </a>
     </div>
   </div>
 </section>
 
+<section class="bg-black text-white py-16 px-4">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+
+    <!-- Linke Seite: Textinhalt -->
+    <div>
+      <h2 class="text-3xl font-extrabold mb-8 text-center md:text-left">
+        UNSER 9 WOCHEN BETREUUNGSKONZEPT
+      </h2>
+
+      <h3 class="text-lg font-semibold mb-6 text-sky-300">ABLAUF:</h3>
+
+      <div class="space-y-6">
+        <!-- Schritt 1 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-300 text-black font-bold flex items-center justify-center mr-4">1</div>
+          <p>
+            Nach einem Anamnese-Gespräch ermitteln wir Ihre individuellen Trainingsziele sowie Bedürfnisse und zeigen Ihnen die Trainingsmöglichkeiten auf, mit denen Sie Ihre Ziele schnell und effektiv erreichen werden.
+          </p>
+        </div>
+
+        <!-- Schritt 2 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-300 text-black font-bold flex items-center justify-center mr-4">2</div>
+          <p>
+            Wir führen einen Fitness Check mit Ihnen durch (Körperwertemessung, Krafttest, Ausdauertest) um Ihren aktuellen Trainingszustand zu ermitteln.
+          </p>
+        </div>
+
+        <!-- Schritt 3 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-300 text-black font-bold flex items-center justify-center mr-4">3</div>
+          <p>
+            Sie erhalten Ihren individuellen Trainingsplan für 10 Wochen.
+          </p>
+        </div>
+
+        <!-- Schritt 4 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-300 text-black font-bold flex items-center justify-center mr-4">4</div>
+          <p>
+            Gemeinsam passen wir dann Ihr Trainingsprogramm nach Ihren Wünschen weiter an. Persönliche Betreuung ist ein wesentlicher Bestandteil unseres Konzepts.
+          </p>
+        </div>
+
+        <!-- Schritt 5 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-300 text-black font-bold flex items-center justify-center mr-4">5</div>
+          <p>
+            Nach 9 Wochen führen wir einen Abschlusstest mit Ihnen durch. Ihre Daten werden ausgewertet, damit wir Ihren Trainingsfortschritt im Hinblick auf Ihr persönliches Trainingsziel immer im Blick behalten.
+          </p>
+        </div>
+
+        <!-- Schritt 6 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-300 text-black font-bold flex items-center justify-center mr-4">6</div>
+          <p>
+            Wir beurteilen zusammen mit Ihnen die bisher erreichten Ergebnisse und setzen durch neue Trainingsmethoden und -varianten neue Impulse für Ihr Trainingsprogramm.
+          </p>
+        </div>
+      </div>
+
+      <!-- Abschlusssatz -->
+      <p class="mt-8 text-gray-200">
+        Mit dieser Erfolgsbetreuung begleiten wir Sie dauerhaft während Ihrer gesamten Trainingszeit.
+      </p>
+    </div>
+
+    <!-- Rechte Seite: Platz für Bild oder Illustration -->
+    <div class="flex items-center justify-center">
+      <!-- Beispielbild (du kannst img/... durch dein eigenes Bild ersetzen) -->
+    </div>
+
+  </div>
+</section>
 
 
 <!-- Das sagen unsere Mitglieder -->
