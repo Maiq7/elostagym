@@ -183,6 +183,43 @@
   </div>
 </section>
 
+<!-- Kontakt -->
+<section class="bg-black text-white py-16 px-4">
+  <div class="max-w-6xl mx-auto text-center">
+
+  
+
+    <div class="inline-flex flex-col md:flex-row gap-80 items-start justify-center text-left">
+      
+      <!-- Kontaktdaten -->
+      <div class="space-y-2">
+        <h3 class="text-xl font-semibold">El Osta GYM Tauberbischofsheim</h3>
+        <p>Am Bild 39<br>97941 Tauberbischofsheim</p>
+        <p class="mt-2">
+          <span class="font-semibold">Telefon:</span> 
+          <a href="tel:+4993417040" class="underline hover:text-sky-300">+49 9341 7040</a>
+        </p>
+      </div>
+
+      <!-- Öffnungszeiten -->
+      <div class="space-y-2">
+        <h3 class="text-xl font-semibold">Öffnungszeiten</h3>
+        <p>
+          <span class="block">Montag – Freitag</span>
+          <span class="block">09.30 – 21.00 Uhr</span>
+        </p>
+        <p class="mt-2">
+          <span class="block">Sa, So & Feiertage</span>
+          <span class="block">10.00 – 15.00 Uhr</span>
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
 
 
 
@@ -264,8 +301,85 @@
   </div>
   
 </section>
+<!-- FAQ-Einträge -->
+<section class="bg-black text-white py-16 px-4" x-data="{ open: null }">
+  <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-10">Häufig gestellte Fragen</h2>
 
+    
+    <div class="space-y-4 text-black">
+      
+      <!-- Frage 1 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 1 ? open = null : open = 1"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Wie genau läuft die Aktion ab?</span>
+          <span class="text-xl font-bold" x-text="open === 1 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 1" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Du meldest dich unverbindlich über das Formular an, wir reservieren dein Angebot und beraten dich persönlich bei deinem ersten Studiobesuch. Danach entscheidest du, ob du starten möchtest.
+        </div>
+      </div>
 
+      <!-- Frage 2 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 2 ? open = null : open = 2"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Was kann ich alles nutzen?</span>
+          <span class="text-xl font-bold" x-text="open === 2 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 2" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Du hast Zugang zu allen Fitnessgeräten, der PowerPlate, dem Solarium, den Kursen sowie unserer Sauna. Alles ist im Aktionszeitraum inklusive.
+        </div>
+      </div>
+
+      <!-- Frage 3 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 3 ? open = null : open = 3"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Kann ich in allen EL OSTA Studios trainieren?</span>
+          <span class="text-xl font-bold" x-text="open === 3 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 3" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Nein. Dieses Angebot gilt exklusiv für unsere Studios in Tauberbischofsheim und Lauda-Königshofen.
+        </div>
+      </div>
+
+      <!-- Frage 4 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 4 ? open = null : open = 4"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Welche Highlights gibt es noch?</span>
+          <span class="text-xl font-bold" x-text="open === 4 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 4" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Unsere Highlights: Technogym Premiumgeräte, individuell betreute Trainingspläne, Squash- und Tennisbereiche, Powerplate-Training und mehr!
+        </div>
+      </div>
+
+      <!-- Frage 5 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 5 ? open = null : open = 5"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Wie kann ich meinen Club testen?</span>
+          <span class="text-xl font-bold" x-text="open === 5 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 5" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Fülle einfach das Formular aus – wir melden uns und vereinbaren einen unverbindlichen Beratungstermin, bei dem du das Studio kennenlernen kannst.
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA-Button -->
+    <div class="text-center mt-10">
+      <a href="angebot.html"
+         class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
+        Jetzt sichern
+      </a>
+    </div>
+  </div>
+</section>
 
 
 <section class="bg-black py-16 px-6">
