@@ -11,6 +11,8 @@
   </style>
    <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 <body class="bg-white text-black scroll-smooth">
 
@@ -102,7 +104,7 @@
 
 
 
-<section class="relative h-[70vh] bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), #000), url('img/main_tbb.jpg');">
+<section class="relative h-[70vh] bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(255, 255, 255, 0.3) 80%, rgba(255, 255, 255, 1) 100%), url('img/main.png');">
   <!-- Overlay -->
   <div class="absolute inset-0 bg-black/3"></div>
 
@@ -184,7 +186,7 @@
 </section>
 
 <!-- Kontakt -->
-<section class="bg-black text-white py-16 px-4">
+<section class="bg-white text-black py-16 px-4">
   <div class="max-w-6xl mx-auto text-center">
 
   
@@ -219,91 +221,136 @@
   </div>
 </section>
 
+<section class="bg-gray-100 text-black py-24 px-6">
+  <div class="max-w-5xl mx-auto text-center">
+    <h2 class="text-4xl md:text-5xl font-bold mb-8">Angebot</h2>
+    <p class="text-lg md:text-xl mb-6 font-semibold">
+      <span class="text-sky-300">EL OSTA GYM</span> 9 Wochen-Fitness-Challenge mit Erfolgsgarantie
+    </p>
+    <p class="text-2xl font-bold text-sky-300 mb-2">für nur 9,90 €/Woche*</p>
+    <p class="text-sm text-black-300 mb-10 max-w-2xl mx-auto">
+      Damit Sie die Katze nicht im Sack kaufen, bieten wir als einziger Anbieter in der Region für Neumitglieder eine einmalige Probezeit von 9 Wochen für nur 9,90 €/Woche an. So können Sie unser Betreuungskonzept 9 Wochen lang in Ruhe testen.
+    </p>
 
+    <!-- Leistungen Box -->
+    <div class="bg-white text-black rounded-2xl shadow-lg p-8 max-w-3xl mx-auto text-left">
+      <h3 class="text-xl font-bold mb-4">Inklusive Leistungen während der 9 Wochen:</h3>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm list-disc list-inside text-gray-800">
+        <li>Trainings-App</li>
+        <li>2–3 × Körperanalyse</li>
+        <li>2 × Krafttest</li>
+        <li>Trainingsplan</li>
+        <li>Getränke-Flat</li>
+        <li>Duschen</li>
+        <li>Power Plate Massage</li>
+        <li>Trainingsbetreuung</li>
+      </ul>
+      <p class="text-xs text-gray-500 mt-6">
+        * Es fällt ein einmaliges Startpaket in Höhe von <strong>48,00 €</strong> an.
+      </p>
+    </div>
 
-
-
-
-
-  <!-- Unsere Leistungen: -->
-  <section class="bg-black text-white py-16 px-4">
-    <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
-  <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Unsere Leistungen</h2>
-    <p class="text-lg text-gray-300 mb-12">Mehr als nur Training – dein Rundum-Erlebnis bei El Osta GYM</p>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-left">
-
-      <!-- Leistung -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10m-10 4h6m-9 4h12" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">9 Wochen Betreuungskonzept</h3>
-        <p class="text-gray-400 text-sm">Individuelle Begleitung & Trainingspläne für deinen optimalen Start.</p>
-      </div>
-
-      <!-- Leistung -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V7a2 2 0 00-2-2H6a2 2 0 00-2 2v6m16 0v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16 0H4" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Premium Fitnessgeräte von Technogym</h3>
-        <p class="text-gray-400 text-sm">Trainiere an modernsten Kraft- & Ausdauerstationen.</p>
-      </div>
-
-      <!-- Powerplate -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553 2.276A1 1 0 0120 13.118V17a1 1 0 01-1 1H5a1 1 0 01-1-1v-3.882a1 1 0 01.447-.842L9 10m3-7v10" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Powerplate</h3>
-        <p class="text-gray-400 text-sm">Vibrationstraining zur Muskelstärkung & Stoffwechselanregung.</p>
-      </div>
-
-      <!-- Solarium -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m6.364 1.636l-1.414 1.414M21 12h-2m-1.636 6.364l-1.414-1.414M12 21v-2m-6.364-1.636l1.414-1.414M3 12h2m1.636-6.364l1.414 1.414M12 7a5 5 0 100 10 5 5 0 000-10z" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Solarium</h3>
-        <p class="text-gray-400 text-sm">Sonnen & entspannen – mit modernen Lichtsystemen.</p>
-      </div>
-
-      <!-- Sauna -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Sauna</h3>
-        <p class="text-gray-400 text-sm">Stärke dein Immunsystem & erhole dich nach dem Training.</p>
-      </div>
-
-      <!-- Squash -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h4a4 4 0 010 8h-4a4 4 0 01-4-4z" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Squash</h3>
-        <p class="text-gray-400 text-sm">Rasanter Spielspaß für Reaktion, Ausdauer & Power.</p>
-      </div>
-
-      <!-- Tennis -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Tennis</h3>
-        <p class="text-gray-400 text-sm">Trainiere Technik, Kondition & Wettkampfgeist.</p>
-      </div>
-
+    <!-- Call-to-Action -->
+    <div class="mt-10">
+      <a href="#kontakt" class="inline-block bg-sky-300 text-black font-bold py-3 px-6 rounded-xl hover:bg-green-400 transition">
+        Jetzt starten
+      </a>
     </div>
   </div>
-  
+</section>
+
+
+
+
+
+
+<!-- Unsere Leistungen -->
+<section class="bg-white text-black py-16 px-4" 
+         x-data="{ 
+           active: null, 
+           currentSlide: 0, 
+           slides: [
+             { img: 'img/selection-pro.jpg', title: '9 Wochen Betreuung' },
+             { img: 'img/pure-strength.jpg', title: 'Technogym Geräte' },
+             { img: 'img/power-plate.jpg', title: 'Powerplate' },
+             { img: 'img/solarium.jpg', title: 'Solarium' },
+             { img: 'img/freihantel.jpg', title: 'Sauna' },
+             { img: 'img/logo.png', title: 'Squash' },
+             { img: 'img/preis.jpg', title: 'Tennis' }
+           ] 
+         }" 
+         x-init="setInterval(() => currentSlide = (currentSlide + 1) % slides.length, 3000)">
+    <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>     
+  <div class="max-w-7xl mx-auto">
+    
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">Unsere Leistungen</h2>
+
+    <!-- Flex-Layout -->
+    <div class="flex flex-col md:flex-row gap-8 md:items-stretch">
+      
+      <!-- ✅ Slider zuerst = links -->
+      <div class="relative w-full md:w-1/3 overflow-hidden rounded-xl shadow-lg"
+           x-init="$nextTick(() => {
+             const accordion = document.getElementById('accordion-column');
+             if (accordion) {
+               $el.style.height = accordion.offsetHeight + 'px';
+             }
+           })">
+        <template x-for="(slide, index) in slides" :key="index">
+          <div x-show="currentSlide === index"
+               x-transition:enter="transform transition ease-out duration-500"
+               x-transition:enter-start="translate-x-full opacity-0"
+               x-transition:enter-end="translate-x-0 opacity-100"
+               x-transition:leave="transform transition ease-in duration-500"
+               x-transition:leave-start="translate-x-0 opacity-100"
+               x-transition:leave-end="-translate-x-full opacity-0"
+               x-cloak
+               class="absolute inset-0 w-full h-full">
+            <img :src="slide.img" alt="" class="w-full h-full object-cover rounded-xl">
+            <div class="absolute bottom-0 left-0 w-full bg-black/70 text-center py-2 text-white text-lg font-semibold">
+              <span x-text="slide.title"></span>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- ✅ Accordion danach = rechts -->
+      <div class="w-full md:w-2/3 space-y-4" id="accordion-column">
+        <template x-for="(item, i) in [
+          { title: '9 Wochen Betreuungskonzept', content: 'Individuelle Trainingsbegleitung und Check-ups in den ersten 9 Wochen.' },
+          { title: 'Premium Fitnessgeräte von Technogym', content: 'Trainiere mit den hochwertigsten Geräten Europas.' },
+          { title: 'Powerplate', content: 'Effektives Vibrationstraining für Muskelstimulation und Regeneration.' },
+          { title: 'Solarium', content: 'Moderne Solarien für gesundes Bräunen & Entspannung. Unsere Sonnenbänke können selbstverständlich auch von Nicht-Mitgliedern genutzt werden.' },
+          { title: 'Sauna', content: 'Stärkt dein Immunsystem und hilft dir zu regenerieren. Unsere  Sauna ist exklusiv und gratis nur für unsere Mitglieder.' },
+          { title: 'Squash', content: 'Reaktionsschnelles Ausdauertraining mit Spaßfaktor.' },
+          { title: 'Tennis', content: 'Trainiere deine Technik, Konzentration & Power auf dem Platz.' }
+        ]" :key="i">
+          <div class="border border-gray-700 rounded-xl overflow-hidden">
+            <button @click="active === i ? active = null : active = i"
+                    class="w-full text-left px-6 py-4 flex justify-between items-center bg-white-800 hover:bg-gray-700">
+              <span class="font-medium" x-text="item.title"></span>
+              <span class="text-xl font-bold" x-text="active === i ? '−' : '+'"></span>
+            </button>
+            <div x-show="active === i" x-transition x-cloak class="px-6 pb-4 pt-2 text-gray-300 text-sm">
+              <p x-text="item.content"></p>
+            </div>
+          </div>
+        </template>
+
+        <!-- CTA Button -->
+        <div class="text-center md:text-left mt-6">
+          <a href="angebot.html"
+             class="inline-block bg-sky-300 text-black px-8 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
+            Angebot sichern
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <!-- FAQ-Einträge -->
-<section class="bg-black text-white py-16 px-4" x-data="{ open: null }">
-  <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+<section class="bg-gray-100 text-black py-16 px-4" x-data="{ open: null }">
+  <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
   <div class="max-w-3xl mx-auto">
     <h2 class="text-3xl font-bold text-center mb-10">Häufig gestellte Fragen</h2>
 
@@ -375,70 +422,307 @@
     <div class="text-center mt-10">
       <a href="angebot.html"
          class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
-        Jetzt sichern
+        Jetzt starten
       </a>
     </div>
   </div>
 </section>
-<section class="bg-black text-white py-20 px-4">
-  <div class="max-w-7xl mx-auto">
+<section class="bg-white text-black py-24 px-6">
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-4xl md:text-5xl font-bold mb-16">Unser Team</h2>
 
-    <!-- Überschrift -->
-    <h2 class="text-3xl font-extrabold mb-12 text-center">Unser Team</h2>
+    <div class="grid gap-10 md:grid-cols-2">
 
-    <!-- Zwei Trainer nebeneinander -->
-    <div class="grid md:grid-cols-2 gap-12">
+      <!-- CARD: Salem -->
+      <div class=" text-white rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden flex flex-col items-center">
+        <!-- Bild oben -->
+        <img src="img/salem.png" alt="Salem El Osta" class="h-80 w-80 object-cover rounded-full mx-auto" />
 
-      <!-- Trainer 1: Salem El Osta -->
-      <div class="flex flex-col md:flex-row items-center gap-6">
-        <!-- Bild mit Namen -->
-        <div class="relative w-full max-w-xs rounded-xl overflow-hidden shadow-xl">
-          <img src="img/salem.png" alt="Salem El Osta" class="w-full h-80 object-cover object-top">
-          <div class="absolute bottom-0 left-0 right-0 bg-black/70 text-center py-3 text-white text-lg font-semibold">
-            Salem El Osta
+        <!-- Inhalt unten -->
+        <div class="p-6 text-center w-full">
+          <h3 class="text-xl font-bold">Salem El Osta</h3>
+          <p class="text-sm text-gray-600 mb-4">Diplom Sportpädagoge & Fitnessökonomie B.A.</p>
+
+          <!-- Toggle Button -->
+          <button onclick="toggleAccordion(this)" class="text-sm font-semibold text-white‚ underline hover:text-gray-700 transition">
+            Qualifikationen anzeigen
+          </button>
+
+          <!-- Accordion -->
+          <div class="hidden mt-4 text-sm text-white text-center accordion-content ">
+            <ul class="list-disc list-inside space-y-1">
+              <li>Diplom Sportpädagogik</li>
+              <li>Bachelor Fitnessökonomie</li>
+              <li>Fitnesstrainer B-Lizenz</li>
+              <li>Trainer für Cardiofitness</li>
+              <li>Ernährungstrainer B-Lizenz</li>
+              <li>Gesundheitstrainer</li>
+              <li>Trainer für Sportrehabilitation</li>
+              <li>Power Plate Basic Coach</li>
+              <li>Power Plate Personal Trainer</li>
+              <li>Power Plate Advanced PT – Rücken</li>
+              <li>Power Plate Advanced PT – Golf</li>
+              <li>Power Plate Advanced Personal</li>
+            </ul>
           </div>
         </div>
-
-        <!-- Qualifikationen -->
-        <ul class="space-y-2 text-gray-100 text-sm md:text-base">
-          <li>Diplom Sportpädagogik</li>
-          <li>Bachelor of Arts Fitnessökonomie</li>
-          <li>Fitnesstrainer B-Lizenz</li>
-          <li>Trainer für Cardiofitness</li>
-          <li>Ernährungstrainer B-Lizenz</li>
-          <li>Gesundheitstrainer</li>
-          <li>Trainer für Sportrehabilitation</li>
-          <li>Power Plate Basic Coach</li>
-          <li>Power Plate Personal Trainer</li>
-          <li>Power Plate Advanced Personal Trainer – Fachfortbildung Rücken</li>
-          <li>Power Plate Advanced Personal Trainer – Fachfortbildung Golf</li>
-        </ul>
       </div>
 
-      <!-- Trainer 2: Tijana Vrajes -->
-      <div class="flex flex-col md:flex-row items-center gap-6">
-        <!-- Bild mit Namen -->
-        <div class="relative w-full max-w-xs rounded-xl overflow-hidden shadow-xl">
-          <img src="img/Tijana.jpg" alt="Tijana Vrajes" class="w-full h-80 object-cover object-top">
-          <div class="absolute bottom-0 left-0 right-0 bg-black/70 text-center py-3 text-white text-lg font-semibold">
-            Tijana Vrajes
-          </div>
-        </div>
+      <!-- CARD: Tijana -->
+      <div class=" text-white rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden flex flex-col items-center">
+        <!-- Bild oben -->
+        <img src="img/tijana.jpg" alt="Tijana Vrajes" class="h-80 w-80 object-cover rounded-full mx-auto" />
 
-        <!-- Qualifikationen -->
-        <ul class="space-y-2 text-gray-100 text-sm md:text-base">
-          <li>Fitnesstrainerin</li>
-          <li>BA Studentin in Fitnessökonomie</li>
-        </ul>
+        <!-- Inhalt unten -->
+        <div class="p-6 text-center w-full">
+          <h3 class="text-xl font-bold">Tijana Vrajes</h3>
+          <p class="text-sm text-gray-600 mb-4">Fitnesstrainerin und BA Studentin in Fitnessökonomie</p>
+        </div>
       </div>
 
     </div>
   </div>
 </section>
 
+<!-- Accordion Script -->
+<script>
+  function toggleAccordion(button) {
+    const content = button.nextElementSibling;
+    const isVisible = !content.classList.contains("hidden");
+
+    // Collapse all other accordions
+    document.querySelectorAll(".accordion-content").forEach(el => el.classList.add("hidden"));
+    document.querySelectorAll("button").forEach(btn => {
+      if (btn !== button) btn.textContent = "Qualifikationen anzeigen";
+    });
+
+    // Toggle this one
+    if (!isVisible) {
+      content.classList.remove("hidden");
+      button.textContent = "Qualifikationen ausblenden";
+    } else {
+      content.classList.add("hidden");
+      button.textContent = "Qualifikationen anzeigen";
+    }
+  }
+</script>
+
+<section class="bg-gray-100 text-black py-24 px-6">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+    <!-- Text & Preistabelle -->
+    <div>
+      <h2 class="text-4xl font-bold mb-8">Tennis</h2>
+
+      <!-- Einzelpreise -->
+      <div class="bg-white text-black rounded-2xl p-6 shadow-md mb-6">
+        <h3 class="text-xl font-semibold mb-4">Einzelpreise</h3>
+        <div class="grid grid-cols-3 gap-4 text-sm text-gray-800">
+          <div></div>
+          <div>10–16 Uhr</div>
+          <div>16–21 Uhr</div>
+          <div>Preis</div>
+          <div>22,00 € (ohne Licht)</div>
+          <div>25,00 €</div>
+        </div>
+      </div>
+
+      <!-- Winter-Abo -->
+      <div class="bg-white text-black rounded-2xl p-6 shadow-md mb-6">
+        <h3 class="text-xl font-semibold mb-4">Winter-Abonnement (30 Wochen)</h3>
+        <div class="grid grid-cols-3 gap-4 text-sm text-gray-800">
+          <div>Mo – Fr</div>
+          <div>550,00 €</div>
+          <div>650,00 €</div>
+          <div>Sa, So & Feiertage (10–15 Uhr)</div>
+          <div>650,00 €</div>
+          <div></div>
+        </div>
+      </div>
+
+      <!-- Hinweis -->
+      <p class="text-sm text-gray-400 mt-4">
+        Von 10–16 Uhr bei Bedarf Lichtmarke lösen (3,00 €). <br />
+        Von 16–21 Uhr inklusive.
+      </p>
+    </div>
+
+    <!-- Bild-Slider -->
+    <div class="w-full">
+      <div class="swiper rounded-2xl overflow-hidden shadow-lg">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide">
+            <img src="img/tennis1.jpg" alt="Tennisplatz 1" class="w-full h-80 object-cover" />
+          </div>
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <img src="img/tennis2.jpg" alt="Tennisplatz 2" class="w-full h-80 object-cover" />
+          </div>
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <img src="img/tennis3.jpg" alt="Tennishalle" class="w-full h-80 object-cover" />
+          </div>
+        </div>
+        <!-- Pagination -->
+        <div class="swiper-pagination mt-2"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="bg-gray-100 text-black py-24 px-6">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+    <!-- Text & Preise -->
+    <div>
+      <h2 class="text-4xl font-bold mb-8">Squash</h2>
+
+      <!-- Einleitungstext -->
+      <p class="text-sm text-black-300 mb-6 leading-relaxed">
+        Wenn Sie schon immer einmal um sich schlagen wollten, dann haben Sie die Gelegenheit, dies im EL OSTA GYM während einer Runde Squash zu tun.
+        Die Regeln dieser dynamischen und sehr beliebten Sportart sind schnell gelernt, und selbst absolute Anfänger haben schon nach wenigen Minuten Spaß am Spiel.
+      </p>
+      <p class="text-sm text-black-300 mb-10 leading-relaxed">
+        Sollten Sie noch keine eigene Ausrüstung besitzen, stehen Ihnen selbstverständlich auch Leihschläger gegen eine Gebühr von <strong>4,00 €</strong> zur Verfügung.
+      </p>
+
+      <!-- Preise Card -->
+      <div class="bg-white text-black rounded-2xl p-6 shadow-md max-w-md">
+        <h3 class="text-xl font-semibold mb-4">Preise</h3>
+        <div class="grid grid-cols-2 gap-4 text-sm text-gray-800">
+          <div>1 Stunde</div>
+          <div>16,00 €</div>
+          <div>Leihschläger</div>
+          <div>4,00 €</div>
+          <div>Leihball</div>
+          <div>1,50 €</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bild-Slider -->
+    <div class="w-full">
+      <div class="swiper rounded-2xl overflow-hidden shadow-lg">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide">
+            <img src="img/squash1.jpg" alt="Squash Court" class="w-full h-80 object-cover" />
+          </div>
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <img src="img/squash2.jpg" alt="Squash Spieler" class="w-full h-80 object-cover" />
+          </div>
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <img src="img/squash3.jpg" alt="Squash Spielszene" class="w-full h-80 object-cover" />
+          </div>
+        </div>
+        <!-- Pagination -->
+        <div class="swiper-pagination mt-2"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="bg-white text-black py-24 px-6">
+  <div class="max-w-7xl mx-auto text-center mb-16">
+   <h2 class="text-4xl font-bold mb-8">Sauna und Solarium</h2>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-12 max-w-7xl mx-auto">
+
+    <!-- Solarium (links) -->
+    <div class="flex flex-col items-center text-center gap-6">
+      <!-- Solarium Slider -->
+      <div class="w-full swiper solarium-swiper rounded-xl overflow-hidden shadow-lg">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="img/solarium1.jpg" alt="Solarium 1" class="w-full h-72 object-cover" />
+          </div>
+          <div class="swiper-slide">
+            <img src="img/solarium2.jpg" alt="Solarium 2" class="w-full h-72 object-cover" />
+          </div>
+        </div>
+        <div class="swiper-pagination mt-2"></div>
+      </div>
+
+      <div>
+        <h3 class="text-2xl font-bold text-gray-400 uppercase tracking-widest mb-2">Solarium</h3>
+        <p class="text-sm text-gray-300 leading-relaxed max-w-sm mx-auto">
+          Unsere Sonnenbänke können selbstverständlich auch von Nicht-Mitgliedern genutzt werden.
+        </p>
+      </div>
+    </div>
+
+    <!-- Sauna (rechts) -->
+    <div class="flex flex-col items-center text-center gap-6">
+      <!-- Sauna Slider -->
+      <div class="w-full swiper sauna-swiper rounded-xl overflow-hidden shadow-lg">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="img/sauna1.jpg" alt="Sauna 1" class="w-full h-72 object-cover" />
+          </div>
+          <div class="swiper-slide">
+            <img src="img/sauna2.jpg" alt="Sauna 2" class="w-full h-72 object-cover" />
+          </div>
+        </div>
+        <div class="swiper-pagination mt-2"></div>
+      </div>
+
+      <div>
+        <h3 class="text-2xl font-bold text-gray-400 uppercase tracking-widest mb-2">Sauna</h3>
+        <p class="text-sm text-gray-300 leading-relaxed max-w-sm mx-auto">
+          Unsere Sauna ist exklusiv und gratis nur für unsere Mitglieder.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SwiperJS CSS & JS (nur einmal pro Seite nötig) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- SwiperJS Initialisierung -->
+<script>
+  new Swiper('.solarium-swiper', {
+    loop: true,
+    pagination: {
+      el: '.solarium-swiper .swiper-pagination',
+      clickable: true,
+    },
+    autoplay: {
+      delay: 4000,
+    },
+  });
+
+  new Swiper('.sauna-swiper', {
+    loop: true,
+    pagination: {
+      el: '.sauna-swiper .swiper-pagination',
+      clickable: true,
+    },
+    autoplay: {
+      delay: 4000,
+    },
+  });
+</script>
+
+
+
+
+
+
+
 <!-- Bilder-Slider-Sektion -->
 <!-- Bildergalerie-Slider -->
-<section class="bg-black text-white py-16 px-4"
+<section class="bg-gray-100 text-black py-16 px-4"
          x-data="{ 
            current: 0, 
            images: [
@@ -451,7 +735,7 @@
          }">
   
   <div class="max-w-7xl mx-auto">
-<div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+<div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
     <!-- ✅ Überschrift -->
     <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">
       Dein EL OSTA GYM in Tauberbischofsheim
@@ -494,8 +778,8 @@
       <template x-for="(img, index) in images" :key="'dot-' + index">
         <button @click="current = index"
                 :class="{
-                  'bg-white': current === index,
-                  'bg-white/30': current !== index
+                  'bg-sky-300': current === index,
+                  'bg-sky-300/30': current !== index
                 }"
                 class="w-3 h-3 rounded-full transition-colors duration-300"></button>
       </template>
@@ -505,10 +789,10 @@
 </section>
 
 
-<section class="bg-black py-16 px-6">
-  <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+<section class="bg-white py-16 px-6">
+  <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
   <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-10">Das sagen unsere Mitglieder</h2>
+    <h2 class="text-3xl md:text-4xl font-extrabold text-black mb-10">Das sagen unsere Mitglieder</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
 
@@ -560,7 +844,19 @@
     </div>
   </div>
 </section>
-
+<!-- SwiperJS Initialisierung (nur einmal pro Seite nötig!) -->
+<script>
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    },
+    autoplay: {
+      delay: 4000,
+    }
+  });
+</script>
 
 
 
@@ -589,28 +885,8 @@
   </div>
 </footer>
 
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<script>
-  const swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    loop: true,
-    autoplay: {
-      delay: 3500,
-      disableOnInteraction: false,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    breakpoints: {
-      768: { slidesPerView: 2 },
-      1024: { slidesPerView: 3 }
-    }
-  });
-</script>
+
 
 </body>
 </html>
