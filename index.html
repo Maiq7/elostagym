@@ -106,7 +106,10 @@
 
 
 
-<section class="relative h-[70vh] bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), #000), url('img/main.png');">
+<section class="relative h-[70vh] bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(255, 255, 255, 0.3) 80%, rgba(255, 255, 255, 1) 100%), url('img/main.png');">
+
+
+
   <!-- Overlay -->
   <div class="absolute inset-0 bg-black/3"></div>
 
@@ -151,7 +154,7 @@
 
 
 <!-- Unsere Leistungen -->
-<section class="bg-black text-white py-16 px-4" 
+<section class="bg-white text-black py-16 px-4" 
          x-data="{ 
            active: null, 
            currentSlide: 0, 
@@ -166,10 +169,14 @@
            ] 
          }" 
          x-init="setInterval(() => currentSlide = (currentSlide + 1) % slides.length, 3000)">
-    <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>     
+    <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>     
   <div class="max-w-7xl mx-auto">
     
-    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">Unsere Leistungen</h2>
+    <h2 class="text-4xl md:text-6xl font-bold text-center mb-12 tracking-tight leading-tight text-gray-900" data-aos="fade-up">
+  <span class="block">Unsere Leistung</span>
+</h2>
+
+
 
     <!-- Flex-Layout -->
     <div class="flex flex-col md:flex-row gap-8 md:items-stretch">
@@ -213,7 +220,7 @@
         ]" :key="i">
           <div class="border border-gray-700 rounded-xl overflow-hidden">
             <button @click="active === i ? active = null : active = i"
-                    class="w-full text-left px-6 py-4 flex justify-between items-center bg-gray-800 hover:bg-gray-700">
+                    class="w-full text-left px-6 py-4 flex justify-between items-center bg-white-800 hover:bg-gray-700">
               <span class="font-medium" x-text="item.title"></span>
               <span class="text-xl font-bold" x-text="active === i ? '−' : '+'"></span>
             </button>
@@ -238,8 +245,8 @@
 
   
   <!-- Unsere Studios -->
-<section class="bg-black text-white py-16 px-6">
-  <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+<section class="bg-gray-100 text-black py-16 px-6">
+  <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
   
   <div class="max-w-6xl mx-auto text-center">
     <h2 class="text-3xl md:text-4xl font-extrabold mb-12">Unsere Studios</h2>
@@ -295,8 +302,8 @@
 </section>
 
 <!-- FAQ-Einträge -->
-<section class="bg-black text-white py-16 px-4" x-data="{ open: null }">
-  <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+<section class="bg-white text-black py-16 px-4" x-data="{ open: null }">
+  <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
   <div class="max-w-3xl mx-auto">
     <h2 class="text-3xl font-bold text-center mb-10">Häufig gestellte Fragen</h2>
 
@@ -374,7 +381,7 @@
   </div>
 </section>
 
-<section class="bg-black text-white py-16 px-4">
+<section class="bg-gray-100 text-black py-16 px-4">
   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
 
     <!-- Linke Seite: Textinhalt -->
@@ -436,7 +443,7 @@
       </div>
 
       <!-- Abschlusssatz -->
-      <p class="mt-8 text-gray-200">
+      <p class="mt-8 text-gray">
         Mit dieser Erfolgsbetreuung begleiten wir Sie dauerhaft während Ihrer gesamten Trainingszeit.
       </p>
     </div>
@@ -451,10 +458,10 @@
 
 
 <!-- Das sagen unsere Mitglieder -->
-<section class="bg-black py-16 px-6">
-  <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+<section class="bg-white py-16 px-6">
+  <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
   <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-10">Das sagen unsere Mitglieder</h2>
+    <h2 class="text-3xl md:text-4xl font-extrabold text-black mb-10">Das sagen unsere Mitglieder</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
 
