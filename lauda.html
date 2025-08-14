@@ -6,8 +6,27 @@
   <title>El Osta Gym</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.store('popupForm', {
+      open: false,
+      data: { standort: '' },              // Platz für optionale Werte
+      openWith(opts = {}) {
+        this.data = { ...this.data, ...opts };
+        this.open = true;
+      },
+      close() { this.open = false; }
+    });
+  });
+</script>
   <style>
     body { font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif; }
+    [x-cloak] { display: none !important; }
   </style>
    <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -102,7 +121,7 @@
 
 
 
-<section class="relative h-[70vh] bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(255, 255, 255, 0.3) 80%, rgba(255, 255, 255, 1) 100%), url('img/main.png');">
+<section class="relative h-[70vh] bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(255, 255, 255, 0.3) 80%, rgba(255, 255, 255, 1) 100%), url('img/main_lauda.jpeg');">
   <!-- Overlay -->
   <div class="absolute inset-0 bg-black/3"></div>
 
@@ -128,51 +147,12 @@
 
   <!-- Öffne-Button -->
   <div class="text-center my-8">
-    <button @click="showForm = true"
-            class="bg-white text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
-      Jetzt unverbindlich reservieren
-    </button>
-  </div>
-
-  <!-- Popup-Formular -->
-  <div x-show="showForm" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" x-transition>
-    <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 relative">
-      <!-- Schließen -->
-      <button @click="showForm = false"
-              class="absolute top-3 right-4 text-gray-500 hover:text-black text-2xl font-bold">&times;</button>
-
-      <h2 class="text-2xl font-bold mb-6 text-center text-black">
-        Wir reservieren dir ein Angebot völlig unverbindlich!
-      </h2>
-
-      <form action="kontakt.php" method="POST" class="space-y-4 text-black">
-        <input type="text" name="vorname" placeholder="Vorname" required
-               class="w-full border border-gray-300 rounded-lg px-4 py-2">
-        <input type="text" name="nachname" placeholder="Nachname" required
-               class="w-full border border-gray-300 rounded-lg px-4 py-2">
-        <input type="tel" name="telefon" placeholder="Telefonnummer" required
-               class="w-full border border-gray-300 rounded-lg px-4 py-2">
-        <input type="email" name="email" placeholder="E-Mail" required
-               class="w-full border border-gray-300 rounded-lg px-4 py-2">
-
-        <select name="standort" required
-                class="w-full border border-gray-300 rounded-lg px-4 py-2">
-          <option value="" disabled selected>Bevorzugter Standort wählen</option>
-          <option value="Tauberbischofsheim">Tauberbischofsheim</option>
-          <option value="Lauda-Königshofen">Lauda-Königshofen</option>
-        </select>
-
-        <label class="flex items-start text-sm text-gray-700">
-          <input type="checkbox" name="dsgvo" required class="mr-2 mt-1">
-          Ich stimme der Verarbeitung meiner Daten gemäß der <a href="datenschutz.html" class="underline text-sky-400"> Datenschutzerklärung</a> zu.
-        </label>
-
-        <button type="submit"
-                class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition w-full">
-          Weiter
-        </button>
-      </form>
-    </div>
+<!-- Öffnet das Formular ohne Voreinstellung -->
+<button
+  @click="$store.popupForm.openWith()"
+  class="bg-white text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
+  Jetzt unverbindlich reservieren
+</button>
   </div>
 </div>
 
@@ -187,9 +167,7 @@
 <section class="bg-white text-black py-16 px-4">
   <div class="max-w-6xl mx-auto text-center">
 
-  
-
-    <div class="inline-flex flex-col md:flex-row gap-80 items-start justify-center text-left">
+    <div class="flex flex-col md:flex-row items-center md:items-start justify-center text-center md:text-left gap-y-10 md:gap-x-32">
       
       <!-- Kontaktdaten -->
       <div class="space-y-2">
@@ -208,7 +186,7 @@
           <span class="block">Mo, Di, Do, Fr</span>
           <span class="block">09.30 – 21.00 Uhr</span>
         </p>
-          <p class="mt-2">
+        <p class="mt-2">
           <span class="block">Mittwoch</span>
           <span class="block">16.00 – 21.00 Uhr</span>
         </p>
@@ -227,81 +205,88 @@
 
 
 
-  <!-- Unsere Leistungen: -->
-  <section class="bg-gray-100 text-black py-16 px-4">
-    <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
-  <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Unsere Leistungen</h2>
-    <p class="text-lg text-black-300 mb-12">Mehr als nur Training – dein Rundum-Erlebnis bei El Osta GYM</p>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-left">
+  <!-- Unsere Leistungen -->
+<section class="bg-gray-100 text-black py-16 px-4" 
+         x-data="{ 
+           active: null, 
+           currentSlide: 0, 
+           slides: [
+             { img: 'img/selection-pro.jpg', title: '9 Wochen Betreuung' },
+             { img: 'img/pure-strength.jpg', title: 'Technogym Geräte' },
+             { img: 'img/power-plate.jpg', title: 'Powerplate' },
+             { img: 'img/solarium.jpg', title: 'Solarium' },
+           ] 
+         }" 
+         x-init="setInterval(() => currentSlide = (currentSlide + 1) % slides.length, 3000)">
+    <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>     
+  <div class="max-w-7xl mx-auto">
+    
+<h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">Unsere Leistungen</h2>
 
-      <!-- Leistung -->
-      <div class="bg-white-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10m-10 4h6m-9 4h12" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">9 Wochen Betreuungskonzept</h3>
-        <p class="text-gray-400 text-sm">Individuelle Begleitung & Trainingspläne für deinen optimalen Start.</p>
+
+
+    <!-- Flex-Layout -->
+    <div class="flex flex-col md:flex-row gap-8 md:items-stretch">
+      
+      <!-- ✅ Slider zuerst = links -->
+      <div class="relative w-full md:w-1/3 overflow-hidden rounded-xl shadow-lg"
+           x-init="$nextTick(() => {
+             const accordion = document.getElementById('accordion-column');
+             if (accordion) {
+               $el.style.height = accordion.offsetHeight + 'px';
+             }
+           })">
+        <template x-for="(slide, index) in slides" :key="index">
+          <div x-show="currentSlide === index"
+               x-transition:enter="transform transition ease-out duration-500"
+               x-transition:enter-start="translate-x-full opacity-0"
+               x-transition:enter-end="translate-x-0 opacity-100"
+               x-transition:leave="transform transition ease-in duration-500"
+               x-transition:leave-start="translate-x-0 opacity-100"
+               x-transition:leave-end="-translate-x-full opacity-0"
+               x-cloak
+               class="absolute inset-0 w-full h-full">
+            <img :src="slide.img" alt="" class="w-full h-full object-cover rounded-xl">
+            <div class="absolute bottom-0 left-0 w-full bg-black/70 text-center py-2 text-white text-lg font-semibold">
+              <span x-text="slide.title"></span>
+            </div>
+          </div>
+        </template>
       </div>
 
-      <!-- Leistung -->
-      <div class="bg-white-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V7a2 2 0 00-2-2H6a2 2 0 00-2 2v6m16 0v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16 0H4" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Premium Fitnessgeräte von Technogym</h3>
-        <p class="text-gray-400 text-sm">Trainiere an modernsten Kraft- & Ausdauerstationen.</p>
-      </div>
+      <!-- ✅ Accordion danach = rechts -->
+      <div class="w-full md:w-2/3 space-y-4" id="accordion-column">
+        <template x-for="(item, i) in [
+          { title: '9 Wochen Betreuungskonzept', content: 'Individuelle Trainingsbegleitung und Check-ups in den ersten 9 Wochen.' },
+          { title: 'Premium Fitnessgeräte von Technogym', content: 'Trainiere mit den hochwertigsten Geräten Europas.' },
+          { title: 'Powerplate', content: 'Effektives Vibrationstraining für Muskelstimulation und Regeneration.' },
+          { title: 'Solarium', content: 'Moderne Solarien für gesundes Bräunen & Entspannung.' },
+        ]" :key="i">
+          <div class="border border-gray-700 rounded-xl overflow-hidden">
+            <button @click="active === i ? active = null : active = i"
+                    class="w-full text-left px-6 py-4 flex justify-between items-center bg-white-800 hover:bg-gray-200">
+              <span class="font-medium" x-text="item.title"></span>
+              <span class="text-xl font-bold" x-text="active === i ? '−' : '+'"></span>
+            </button>
+            <div x-show="active === i" x-transition x-cloak class="px-6 pb-4 pt-2 text-black-300 text-sm">
+              <p x-text="item.content"></p>
+            </div>
+          </div>
+        </template>
 
-      <!-- Powerplate -->
-      <div class="bg-white-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553 2.276A1 1 0 0120 13.118V17a1 1 0 01-1 1H5a1 1 0 01-1-1v-3.882a1 1 0 01.447-.842L9 10m3-7v10" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Powerplate</h3>
-        <p class="text-gray-400 text-sm">Vibrationstraining zur Muskelstärkung & Stoffwechselanregung.</p>
+       <!-- Öffne-Button -->
+  <div class="text-center my-8">
+<!-- Öffnet das Formular ohne Voreinstellung -->
+<button
+  @click="$store.popupForm.openWith()"
+  class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
+  Jetzt unverbindlich reservieren
+</button>
+  </div>
       </div>
-
-      <!-- Solarium -->
-      <div class="bg-white-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m6.364 1.636l-1.414 1.414M21 12h-2m-1.636 6.364l-1.414-1.414M12 21v-2m-6.364-1.636l1.414-1.414M3 12h2m1.636-6.364l1.414 1.414M12 7a5 5 0 100 10 5 5 0 000-10z" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Solarium</h3>
-        <p class="text-gray-400 text-sm">Sonnen & entspannen – mit modernen Lichtsystemen.</p>
-      </div>
-
-      <!-- Sauna -->
-      <div class="bg-white-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Sauna</h3>
-        <p class="text-gray-400 text-sm">Stärke dein Immunsystem & erhole dich nach dem Training.</p>
-      </div>
-
-      <!-- Squash -->
-      <div class="bg-white-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h4a4 4 0 010 8h-4a4 4 0 01-4-4z" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Squash</h3>
-        <p class="text-gray-400 text-sm">Rasanter Spielspaß für Reaktion, Ausdauer & Power.</p>
-      </div>
-
-      <!-- Tennis -->
-      <div class="bg-white-900 rounded-xl p-6 shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-        <h3 class="text-xl font-semibold mb-2">Tennis</h3>
-        <p class="text-gray-400 text-sm">Trainiere Technik, Kondition & Wettkampfgeist.</p>
-      </div>
-
     </div>
   </div>
-  
 </section>
 <section class="bg-white text-black py-16 px-4">
   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
@@ -365,7 +350,7 @@
       </div>
 
       <!-- Abschlusssatz -->
-      <p class="mt-8 text-black-200">
+      <p class="mt-8 text-gray">
         Mit dieser Erfolgsbetreuung begleiten wir Sie dauerhaft während Ihrer gesamten Trainingszeit.
       </p>
     </div>
@@ -373,6 +358,8 @@
     <!-- Rechte Seite: Platz für Bild oder Illustration -->
     <div class="flex items-center justify-center">
       <!-- Beispielbild (du kannst img/... durch dein eigenes Bild ersetzen) -->
+       <img src="img/mann_und_frau.png" alt="Mann und Frau">
+
     </div>
 
   </div>
@@ -381,7 +368,7 @@
 <section class="bg-gray-100 text-black py-16 px-4" x-data="{ open: null }">
   <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
   <div class="max-w-3xl mx-auto">
-    <h2 class="text-3xl font-bold text-center mb-10">Häufig gestellte Fragen</h2>
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">Häufig gestellte Fragen</h2>
 
     
     <div class="space-y-4 text-black">
@@ -447,49 +434,83 @@
       </div>
     </div>
 
-    <!-- CTA-Button -->
-    <div class="text-center mt-10">
-      <a href="angebot.html"
-         class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
-        Jetzt sichern
-      </a>
-    </div>
+     <!-- Öffne-Button -->
+  <div class="text-center my-8">
+<!-- Öffnet das Formular ohne Voreinstellung -->
+<button
+  @click="$store.popupForm.openWith()"
+  class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
+  Jetzt unverbindlich reservieren
+</button>
+  </div>
   </div>
 </section>
-<section class="bg-white text-black py-20 px-4">
-  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+<section class="bg-white text-black py-24 px-6">
+ <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">Unser Team</h2>
 
-    <!-- Linke Seite: Text -->
-    <div>
-      <h2 class="text-3xl font-extrabold mb-8 text-center md:text-left">Unser Team</h2>
+    <div class="grid gap-10 md:grid-cols-1">
 
-      <ul class="space-y-3 list-disc list-inside text-black-100">
-        <li>Diplom Sportpädagogik</li>
-        <li>Bachelor of Arts Fitnessökonomie</li>
-        <li>Fitnesstrainer B-Lizenz</li>
-        <li>Trainer für Cardiofitness</li>
-        <li>Ernährungstrainer B-Lizenz</li>
-        <li>Gesundheitstrainer</li>
-        <li>Trainer für Sportrehabilitation</li>
-        <li>Power Plate Basic Coach</li>
-        <li>Power Plate Personal Trainer</li>
-        <li>Power Plate Advanced Personal Trainer – Fachfortbildung Rücken</li>
-        <li>Power Plate Advanced Personal Trainer – Fachfortbildung Golf</li>
-      </ul>
-    </div>
+      <!-- CARD: Salem -->
+      <div class=" text-white rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden flex flex-col items-center">
+        <!-- Bild oben -->
+        <img src="img/salem.png" alt="Salem El Osta" class="h-80 w-80 object-cover rounded-full mx-auto" />
 
-    <!-- Rechte Seite: Trainerbild mit Name-Overlay -->
-    <div class="relative w-full max-w-sm mx-auto rounded-xl overflow-hidden shadow-xl">
-      <img src="img/salem.png" alt="Trainer Salem" class="w-full h-auto object-cover">
+        <!-- Inhalt unten -->
+        <div class="p-6 text-center w-full">
+          <h3 class="text-xl font-bold text-black">Salem El Osta</h3>
+          <p class="text-sm text-gray-600 mb-4">Diplom Sportpädagoge & Fitnessökonomie B.A.</p>
 
-      <!-- Name-Overlay unten im Bild -->
-      <div class="absolute bottom-0 left-0 right-0 bg-black/70 text-center py-3 text-white text-lg font-semibold">
-        Salem El Osta
+      <!-- Toggle Button -->
+<button onclick="toggleAccordion(this)" class="text-sm font-semibold text-black underline hover:text-gray-700 transition">
+  Qualifikationen anzeigen
+</button>
+
+
+          <!-- Accordion -->
+          <div class="hidden mt-4 text-sm text-black text-center accordion-content ">
+            <ul class="list-disc list-inside space-y-1">
+              <li>Diplom Sportpädagogik</li>
+              <li>Bachelor Fitnessökonomie</li>
+              <li>Fitnesstrainer B-Lizenz</li>
+              <li>Trainer für Cardiofitness</li>
+              <li>Ernährungstrainer B-Lizenz</li>
+              <li>Gesundheitstrainer</li>
+              <li>Trainer für Sportrehabilitation</li>
+              <li>Power Plate Basic Coach</li>
+              <li>Power Plate Personal Trainer</li>
+              <li>Power Plate Advanced PT – Rücken</li>
+              <li>Power Plate Advanced PT – Golf</li>
+              <li>Power Plate Advanced Personal</li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-
   </div>
 </section>
+<!-- Accordion Script -->
+<script>
+  function toggleAccordion(button) {
+    const content = button.nextElementSibling;
+    const isVisible = !content.classList.contains("hidden");
+
+    // Collapse all other accordions
+   document.querySelectorAll(".accordion-toggle .label").forEach(lbl => {
+  if (lbl.closest("button") !== button) lbl.textContent = "Qualifikationen anzeigen";
+});
+
+
+    // Toggle this one
+    if (!isVisible) {
+      content.classList.remove("hidden");
+      button.textContent = "Qualifikationen ausblenden";
+    } else {
+      content.classList.add("hidden");
+      button.textContent = "Qualifikationen anzeigen";
+    }
+  }
+</script>
 
 
 <!-- Bilder-Slider-Sektion -->
@@ -498,18 +519,18 @@
          x-data="{ 
            current: 0, 
            images: [
-             'img/freihantel.jpg', 
-             'img/solarium.jpg', 
-             'img/power-platt.jpg', 
-             'img/Ausdauer.jpg', 
-             'img/Selection-pro.jpg'
+             'img/lauda-1.jpg', 
+             'img/lauda-2.jpg', 
+             'img/lauda-3.jpeg', 
+             'img/lauda-4.jpeg', 
+             'img/lauda-6.jpg'
            ] 
          }">
   
   <div class="max-w-7xl mx-auto">
-<div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+<div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
     <!-- ✅ Überschrift -->
-    <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">
       Dein EL OSTA GYM in Lauda
     </h2>
 
@@ -561,87 +582,76 @@
 </section>
 
 
-<section class="bg-white py-16 px-6">
-  <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
+<!-- Das sagen unsere Mitglieder -->
+ <section class="bg-white py-16 px-6">
+  <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
   <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-black mb-10">Das sagen unsere Mitglieder</h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-
-      <!-- Bewertung 1 -->
-      <div class="bg-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg transition">
-        <div class="flex items-center mb-4">
-          <img src="https://via.placeholder.com/60" alt="Profilbild" class="w-12 h-12 rounded-full mr-4">
-          <div>
-            <p class="font-semibold text-gray-800">Lisa M.</p>
-            <p class="text-sm text-gray-500">vor 1 Woche</p>
-          </div>
-        </div>
-        <div class="flex items-center text-yellow-400 mb-2">
-          ★★★★★
-        </div>
-        <p class="text-gray-700 text-sm">Top Studio! Die Trainer sind super freundlich und ich fühle mich rundum wohl.</p>
-      </div>
-
-      <!-- Bewertung 2 -->
-      <div class="bg-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg transition">
-        <div class="flex items-center mb-4">
-          <img src="https://via.placeholder.com/60" alt="Profilbild" class="w-12 h-12 rounded-full mr-4">
-          <div>
-            <p class="font-semibold text-gray-800">Sebastian K.</p>
-            <p class="text-sm text-gray-500">vor 2 Wochen</p>
-          </div>
-        </div>
-        <div class="flex items-center text-yellow-400 mb-2">
-          ★★★★★
-        </div>
-        <p class="text-gray-700 text-sm">Super Geräte und das 9-Wochen-Betreuungskonzept ist Gold wert!</p>
-      </div>
-
-      <!-- Bewertung 3 -->
-      <div class="bg-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg transition">
-        <div class="flex items-center mb-4">
-          <img src="https://via.placeholder.com/60" alt="Profilbild" class="w-12 h-12 rounded-full mr-4">
-          <div>
-            <p class="font-semibold text-gray-800">Maik K.</p>
-            <p class="text-sm text-gray-500">vor 4 Tagen</p>
-          </div>
-        </div>
-        <div class="flex items-center text-yellow-400 mb-2">
-          ★★★★★
-        </div>
-        <p class="text-gray-700 text-sm">Modernes Studio mit Power Plate, Solarium und toller Atmosphäre!</p>
-      </div>
-
-    </div>
-  </div>
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">
+      Das sagen unsere Mitglieder.
+    </h2>
+<!-- Elfsight Google Reviews | Untitled Google Reviews -->
+<script src="https://static.elfsight.com/platform/platform.js" async></script>
+<div class="elfsight-app-e3a8e9d2-0f12-47b5-96e6-be5fd3286059" data-elfsight-app-lazy></div>
+ </div>
 </section>
 
 
 
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 py-6 px-4 text-sm text-gray-400">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-  <!-- Rechte Seite: Copyright + Made by -->
-    <div class="text-left">
-      <p>&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
-      <p class="text-xs mt-1">Made by Maik</p>
-    </div>
-        <div class="flex-shrink-0">
+<!-- Footer -->
+<footer class="bg-white pt-6 pb-6 px-4 text-xs text-black">
+  <div class="max-w-7xl mx-auto w-full flex flex-col items-center gap-6">
+
+    <!-- Horizontale Linie -->
+    <hr class="w-full border-t border-gray-300">
+
+    <!-- El Osta Logo: zentriert -->
+    <div class="flex justify-center items-center">
       <a href="index.html">
         <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
       </a>
     </div>
-    <!-- Linke Seite: Menü -->
-    <div class="space-y-2 md:space-y-0 md:space-x-6 md:flex">
-      <a href="impressum.html" class="block hover:text-white">Impressum</a>
-      <a href="datenschutz.html" class="block hover:text-white">Datenschutz</a>
-      <a href="mitgliedschaft.html" class="block hover:text-white">Mitgliedschaft verwalten</a>
+
+    <!-- Footer-Inhalt: responsive Layout -->
+    <div class="w-full flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+
+      <!-- Linke Seite: Copyright + Made by -->
+      <div class="z-10">
+        <p class="flex justify-center md:justify-start items-center">
+          Made by
+          <a href="https://fitrada.de" target="_blank" class="ml-2">
+            <img src="img/Fitrada_logo.png" alt="fitrada_logo" class="h-16 inline">
+          </a>
+        </p>
+        <p class="mt-1">&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
+        <div class="mt-1">
+          <a href="https://www.facebook.com/deineSeite" target="_blank" class="mr-2 text-xl hover:text-blue-600">
+            <i class="fab fa-facebook-square"></i>
+          </a>
+          <a href="https://www.instagram.com/deineSeite" target="_blank" class="text-xl hover:text-pink-500">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Rechte Seite: Button + Menü -->
+      <div class="flex flex-col items-center md:items-end space-y-4 z-10">
+
+        <!-- Button -->
+        <a href="Probetraining.html" class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
+          Jetzt Probetraining beantragen
+        </a>
+
+        <!-- Menü -->
+        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-base">
+          <a href="impressum.html" class="hover:text-gray-700">Impressum</a>
+          <a href="datenschutz.html" class="hover:text-gray-700">Datenschutz</a>
+          <a href="mitgliedschaft.html" class="hover:text-gray-700">Mitgliedschaft verwalten</a>
+        </div>
+
+      </div>
+
     </div>
-
-  
-
   </div>
 </footer>
 
@@ -667,6 +677,69 @@
     }
   });
 </script>
- 
+<!-- Zurück nach oben Button mit Icon -->
+<button onclick="scrollToTop()"
+        class="fixed bottom-4 right-4 z-50 bg-white/80 hover:bg-white text-black border border-black rounded-full p-3 shadow-lg backdrop-blur transition-all"
+        id="backToTopBtn"
+        aria-label="Nach oben scrollen">
+  <!-- Heroicon: Chevron Up -->
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+       stroke-width="2" stroke="currentColor" class="w-5 h-5">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+  </svg>
+</button>
+<!-- Popup-Formular -->
+<div x-data
+     x-show="$store.popupForm.open"
+     x-cloak
+     @keydown.escape.window="$store.popupForm.close()"
+     class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+     x-transition>
+  <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 relative">
+    <!-- Schließen -->
+    <button @click="$store.popupForm.close()"
+            class="absolute top-3 right-4 text-gray-500 hover:text-black text-2xl font-bold">&times;</button>
+
+    <h2 class="text-2xl font-bold mb-6 text-center text-black">
+      Wir reservieren dir ein Angebot völlig unverbindlich!
+    </h2>
+
+    <form action="kontakt.php" method="POST" class="space-y-4 text-black">
+      <input type="text" name="vorname" placeholder="Vorname" required
+             class="w-full border border-gray-300 rounded-lg px-4 py-2">
+      <input type="text" name="nachname" placeholder="Nachname" required
+             class="w-full border border-gray-300 rounded-lg px-4 py-2">
+      <input type="tel" name="telefon" placeholder="Telefonnummer" required
+             class="w-full border border-gray-300 rounded-lg px-4 py-2">
+      <input type="email" name="email" placeholder="E-Mail" required
+             class="w-full border border-gray-300 rounded-lg px-4 py-2">
+
+      <!-- Standort aus Store befüllen (optional) -->
+      <select name="standort" required x-model="$store.popupForm.data.standort"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2">
+        <option value="" disabled :selected="!$store.popupForm.data.standort">Bevorzugter Standort wählen</option>
+        <option value="Tauberbischofsheim">Tauberbischofsheim</option>
+        <option value="Lauda-Königshofen">Lauda-Königshofen</option>
+      </select>
+
+      <div class="flex items-start gap-3">
+        <input id="dsgvo" name="dsgvo" type="checkbox" required
+               class="mt-1 h-4 w-4 border-gray-300 rounded">
+        <label for="dsgvo" class="text-sm leading-6">
+          Ich stimme der Verarbeitung meiner Daten,
+          <span class="whitespace-nowrap">
+            gemäß der <a href="datenschutz.html"
+                         class="underline text-sky-600 hover:text-sky-800 inline">Datenschutzerklärung</a> zu.
+          </span>
+        </label>
+      </div>
+
+      <button type="submit"
+              class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition w-full">
+        Weiter
+      </button>
+    </form>
+  </div>
+</div>
 </body>
 </html>

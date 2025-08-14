@@ -208,28 +208,60 @@
 
 
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 py-6 px-4 text-sm text-gray-400">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-  <!-- Rechte Seite: Copyright + Made by -->
-    <div class="text-left">
-      <p>&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
-      <p class="text-xs mt-1">Made by Maik</p>
-    </div>
-        <div class="flex-shrink-0">
+<!-- Footer -->
+<footer class="bg-white pt-6 pb-6 px-4 text-xs text-black">
+  <div class="max-w-7xl mx-auto w-full flex flex-col items-center gap-6">
+
+    <!-- Horizontale Linie -->
+    <hr class="w-full border-t border-gray-300">
+
+    <!-- El Osta Logo: zentriert -->
+    <div class="flex justify-center items-center">
       <a href="index.html">
         <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
       </a>
     </div>
-    <!-- Linke Seite: Menü -->
-    <div class="space-y-2 md:space-y-0 md:space-x-6 md:flex">
-      <a href="impressum.html" class="block hover:text-white">Impressum</a>
-      <a href="datenschutz.html" class="block hover:text-white">Datenschutz</a>
-      <a href="mitgliedschaft.html" class="block hover:text-white">Mitgliedschaft verwalten</a>
+
+    <!-- Footer-Inhalt: responsive Layout -->
+    <div class="w-full flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+
+      <!-- Linke Seite: Copyright + Made by -->
+      <div class="z-10">
+        <p class="flex justify-center md:justify-start items-center">
+          Made by
+          <a href="https://fitrada.de" target="_blank" class="ml-2">
+            <img src="img/Fitrada_logo.png" alt="fitrada_logo" class="h-16 inline">
+          </a>
+        </p>
+        <p class="mt-1">&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
+        <div class="mt-1">
+          <a href="https://www.facebook.com/deineSeite" target="_blank" class="mr-2 text-xl hover:text-blue-600">
+            <i class="fab fa-facebook-square"></i>
+          </a>
+          <a href="https://www.instagram.com/deineSeite" target="_blank" class="text-xl hover:text-pink-500">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Rechte Seite: Button + Menü -->
+      <div class="flex flex-col items-center md:items-end space-y-4 z-10">
+
+        <!-- Button -->
+        <a href="Probetraining.html" class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
+          Jetzt Probetraining beantragen
+        </a>
+
+        <!-- Menü -->
+        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-base">
+          <a href="impressum.html" class="hover:text-gray-700">Impressum</a>
+          <a href="datenschutz.html" class="hover:text-gray-700">Datenschutz</a>
+          <a href="mitgliedschaft.html" class="hover:text-gray-700">Mitgliedschaft verwalten</a>
+        </div>
+
+      </div>
+
     </div>
-
-  
-
   </div>
 </footer>
 

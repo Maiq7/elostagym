@@ -6,11 +6,6 @@
   <title>El Osta Gym</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <script>
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-</script>
   <style>
     body { font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif; }
   </style>
@@ -117,48 +112,20 @@
 
       <!-- Abstand zum oberen Kasten -->
       <div class="mt-8 mb-6">
-        <span class="text-6xl md:text-8xl font-extrabold text-white"></span>
+        <span class="text-6xl md:text-8xl font-extrabold text-white">Vielen Dank!</span>
+        <p style="font-size: 1.2rem; margin-bottom: 1rem; color: white;">
+      Das hat geklappt! Wir werden uns schnellstmöglichst mit dir in Verbindung setzen.
+    </p>
+        <!-- Button -->
+        <a href="index.html" class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
+          Zurück zur Startseite
+        </a>
       </div>
 
 
     </div>
 
 </section>
-
-</section>
-<section class="max-w-3xl mx-auto py-16 px-4">
-    <h1 class="text-3xl font-bold mb-6 text-center">Jetzt Mitgliedschaft kündigen</h1>
-<form action="mitgliedschaft.php" method="POST" class="space-y-6 bg-gray-100 p-6 rounded-lg shadow-md">
-  <div>
-    <label for="name" class="block font-semibold mb-1">Name</label>
-    <input type="text" name="name" id="name" required class="w-full px-4 py-2 border rounded-md" />
-  </div>
-
-  <div>
-    <label for="email" class="block font-semibold mb-1">E-Mail</label>
-    <input type="email" name="email" id="email" required class="w-full px-4 py-2 border rounded-md" />
-  </div>
-
-  <div>
-    <label for="nachricht" class="block font-semibold mb-1">Nachricht (optional)</label>
-    <textarea name="nachricht" id="nachricht" rows="4" class="w-full px-4 py-2 border rounded-md"></textarea>
-  </div>
-<div class="flex items-start">
-  <input type="checkbox" name="dsgvo" id="dsgvo" required class="mt-1 mr-2">
-  <label for="dsgvo" class="text-sm">
-    Ich stimme der Verarbeitung meiner Daten gemäß der
-    <a href="datenschutz.html" class="underline text-sky-600 hover:text-sky-800">Datenschutzerklärung</a> zu.
-  </label>
-</div>
-  <button type="submit" class="bg-sky-300 hover:bg-sky-700 text-black font-semibold px-6 py-3 rounded-md">
-    Anfrage absenden
-  </button>
-</form>
-  </section>
-
-
-
-
 
 
 
@@ -241,16 +208,6 @@
     }
   });
 </script>
-<!-- Zurück nach oben Button mit Icon -->
-<button onclick="scrollToTop()"
-        class="fixed bottom-4 right-4 z-50 bg-white/80 hover:bg-white text-black border border-black rounded-full p-3 shadow-lg backdrop-blur transition-all"
-        id="backToTopBtn"
-        aria-label="Nach oben scrollen">
-  <!-- Heroicon: Chevron Up -->
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-       stroke-width="2" stroke="currentColor" class="w-5 h-5">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-  </svg>
-</button>
+
 </body>
 </html>

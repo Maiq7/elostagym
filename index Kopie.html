@@ -7,33 +7,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-<script>
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-</script>
-<script>
-  document.addEventListener('alpine:init', () => {
-    Alpine.store('popupForm', {
-      open: false,
-      data: { standort: '' },              // Platz für optionale Werte
-      openWith(opts = {}) {
-        this.data = { ...this.data, ...opts };
-        this.open = true;
-      },
-      close() { this.open = false; }
-    });
-  });
-</script>
-
   <style>
     body { font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif; }
     
   </style>
    <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 
 
 </head>
@@ -69,19 +48,20 @@
 
 <div class="max-w-7xl mx-auto flex items-center justify-between">
    <!-- Linke Gruppe: Button + Navigation -->
-    <div class="flex items-center gap-4">
-  
-  <!-- Toggle Button -->
-  <button @click="collapsed = !collapsed"
-          class="w-8 h-8 flex items-center justify-center text-white focus:outline-none">
-    <!-- Icon: Mobile-Version (nur sichtbar < md) -->
-    <template x-if="!collapsed">
-      <svg class="w-6 h-6 md:hidden" fill="none" stroke="currentColor" stroke-width="2"
-           viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </template>
- <template x-if="collapsed">
+    <div class="flex items-center gap-2">
+   <!-- Toggle Button -->
+<button @click="collapsed = !collapsed"
+        class="w-8 h-8 flex items-center justify-center text-white focus:outline-none">
+
+  <!-- Icon: Mobile-Version (nur sichtbar < md) -->
+  <template x-if="!collapsed">
+    <svg class="w-6 h-6 md:hidden" fill="none" stroke="currentColor" stroke-width="2"
+         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Hamburger-Icon -->
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </template>
+  <template x-if="collapsed">
     <svg class="w-6 h-6 md:hidden" fill="none" stroke="currentColor" stroke-width="2"
          viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
       <!-- X-Icon -->
@@ -89,48 +69,44 @@
     </svg>
   </template>
 
-    <!-- Icon: Desktop-Version (immer sichtbar ab md) -->
-    <svg class="w-6 h-6 hidden md:block" fill="none" stroke="currentColor" stroke-width="2"
-         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  </button>
+  <!-- Icon: Desktop-Version (immer sichtbar ab md) -->
+  <svg class="w-6 h-6 hidden md:block" fill="none" stroke="currentColor" stroke-width="2"
+       viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+    <!-- X-Icon dauerhaft für Desktop -->
+    <path d="M6 18L18 6M6 6l12 12" />
+  </svg>
+</button>
 
 
-  <!-- Desktop-Navigation -->
-  <nav x-show="!collapsed"
-       x-transition:enter="transition ease-out duration-300"
-       x-transition:enter-start="opacity-0 -translate-x-4"
-       x-transition:enter-end="opacity-100 translate-x-0"
-       x-transition:leave="transition ease-in duration-200"
-       x-transition:leave-start="opacity-100 translate-x-0"
-       x-transition:leave-end="opacity-0 -translate-x-4"
-       class="hidden md:flex space-x-10 text-base font-medium">
-    <a href="index.html" class="text-white hover:text-sky-300">Home</a>
-    <a href="preise.html" class="text-white hover:text-sky-300">Preise</a>
-    <a href="tbb.html" class="text-white hover:text-sky-300">Studio Tauberbischofsheim</a>
-    <a href="lauda.html" class="text-white hover:text-sky-300">Studio Lauda</a>
-  </nav>
-</div>
-
+      <!-- Desktop-Navigation -->
+      <nav x-show="!collapsed"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 -translate-x-4"
+           x-transition:enter-end="opacity-100 translate-x-0"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 translate-x-0"
+           x-transition:leave-end="opacity-0 -translate-x-4"
+           class="hidden md:flex space-x-10 text-base font-medium">
+        <a href="index.html" class="text-white hover:text-sky-300">Home</a>
+        <a href="preise.html" class="text-white hover:text-sky-300">Preise</a>
+        <a href="tbb.html" class="text-white hover:text-sky-300">Studio Tauberbischofsheim</a>
+        <a href="lauda.html" class="text-white hover:text-sky-300">Studio Lauda</a>
+      </nav>
+    </div>
 
     <!-- Rechte Gruppe: Logo -->
     <div class="flex-shrink-0">
-          
       <a href="index.html">
         <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
       </a>
-   
     </div>
+
   </div>
 </header>
 
 
 
-<section class="relative h-[70vh] bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(255, 255, 255, 0.3) 80%, rgba(255, 255, 255, 1) 100%), url('img/main.png');">
-
-
-
+<section class="relative h-[70vh] bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), #000), url('img/main.png');">
   <!-- Overlay -->
   <div class="absolute inset-0 bg-black/3"></div>
 
@@ -175,7 +151,7 @@
 
 
 <!-- Unsere Leistungen -->
-<section class="bg-white text-black py-16 px-4" 
+<section class="bg-black text-white py-16 px-4" 
          x-data="{ 
            active: null, 
            currentSlide: 0, 
@@ -183,21 +159,17 @@
              { img: 'img/selection-pro.jpg', title: '9 Wochen Betreuung' },
              { img: 'img/pure-strength.jpg', title: 'Technogym Geräte' },
              { img: 'img/power-plate.jpg', title: 'Powerplate' },
-             { img: 'img/solarium-tbb-1.jpg', title: 'Solarium' },
-             { img: 'img/sauna-1.jpg', title: 'Sauna' },
-             { img: 'img/squash-1.jpg', title: 'Squash' },
-             { img: 'img/tennis-1.jpg', title: 'Tennis' }
+             { img: 'img/solarium.jpg', title: 'Solarium' },
+             { img: 'img/freihantel.jpg', title: 'Sauna' },
+             { img: 'img/logo.png', title: 'Squash' },
+             { img: 'img/preis.jpg', title: 'Tennis' }
            ] 
          }" 
          x-init="setInterval(() => currentSlide = (currentSlide + 1) % slides.length, 3000)">
-    <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>     
+    <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>     
   <div class="max-w-7xl mx-auto">
     
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 tracking-tight leading-tight text-gray-900" data-aos="fade-up">
-  <span class="block">Unsere Leistung</span>
-</h2>
-
-
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">Unsere Leistungen</h2>
 
     <!-- Flex-Layout -->
     <div class="flex flex-col md:flex-row gap-8 md:items-stretch">
@@ -241,28 +213,23 @@
         ]" :key="i">
           <div class="border border-gray-700 rounded-xl overflow-hidden">
             <button @click="active === i ? active = null : active = i"
-                    class="w-full text-left px-6 py-4 flex justify-between items-center bg-white-800 hover:bg-gray-200">
+                    class="w-full text-left px-6 py-4 flex justify-between items-center bg-gray-800 hover:bg-gray-700">
               <span class="font-medium" x-text="item.title"></span>
               <span class="text-xl font-bold" x-text="active === i ? '−' : '+'"></span>
             </button>
-            <div x-show="active === i" x-transition x-cloak class="px-6 pb-4 pt-2 text-black-300 text-sm">
+            <div x-show="active === i" x-transition x-cloak class="px-6 pb-4 pt-2 text-gray-300 text-sm">
               <p x-text="item.content"></p>
             </div>
           </div>
         </template>
 
-       <div x-data="{ showForm: false }">
-
-  <!-- Öffne-Button -->
-  <div class="text-center my-8">
-<!-- Öffnet das Formular ohne Voreinstellung -->
-<button
-  @click="$store.popupForm.openWith()"
-  class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
-  Jetzt unverbindlich reservieren
-</button>
-  </div>
-</div>
+        <!-- CTA Button -->
+        <div class="text-center md:text-left mt-6">
+          <a href="angebot.html"
+             class="inline-block bg-sky-300 text-black px-8 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
+            Angebot sichern
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -271,8 +238,8 @@
 
   
   <!-- Unsere Studios -->
-<section class="bg-gray-100 text-black py-16 px-6">
-  <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
+<section class="bg-black text-white py-16 px-6">
+  <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
   
   <div class="max-w-6xl mx-auto text-center">
     <h2 class="text-3xl md:text-4xl font-extrabold mb-12">Unsere Studios</h2>
@@ -280,56 +247,56 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
   <!-- Studio Karte 1 -->
-<a href="tbb.html" class="block">
-  <div class="relative rounded-xl overflow-hidden shadow-lg group h-[40rem] cursor-pointer">
+  <div class="relative rounded-xl overflow-hidden shadow-lg group h-[40rem]">
     <!-- Hintergrundbild -->
     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/main_tbb.jpg');"></div>
 
     <!-- Standortname oben zentriert mit halbtransparentem Hintergrund -->
-    <div class="absolute top-0 left-0 w-full bg-black/80">
-      <div class="text-white text-xl md:text-2xl font-bold px-6 py-3 text-center">
+    <div class="absolute top left-1/2 transform -translate-x-1/2">
+      <div class="bg-sky-300/50 text-white text-xl md:text-2xl font-bold px-6 py-3 rounded-lg text-center">
         Tauberbischofsheim
       </div>
     </div>
 
-    <!-- Optionaler "Button" unten, nur als optisches Element -->
+    <!-- Button unten -->
     <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2">
-      <div class="bg-white text-black px-6 py-2 rounded-lg font-semibold text-sm group-hover:bg-sky-300 transition">
+      <a href="tbb.html"
+         class="bg-white text-black px-6 py-2 rounded-lg font-semibold text-sm hover:bg-emerald-300 transition">
         Zum Studio
-      </div>
+      </a>
     </div>
   </div>
-</a>
 
   <!-- Studio Karte 2 -->
-<a href="lauda.html" class="block">
-  <div class="relative rounded-xl overflow-hidden shadow-lg group h-[40rem] cursor-pointer">
+  <div class="relative rounded-xl overflow-hidden shadow-lg group h-[40rem]">
     <!-- Hintergrundbild -->
     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/main_lauda.jpeg');"></div>
 
     <!-- Standortname oben zentriert mit halbtransparentem Hintergrund -->
-    <div class="absolute top-0 left-0 w-full bg-black/80">
-      <div class="text-white text-xl md:text-2xl font-bold px-6 py-3 text-center">
+    <div class="absolute top left-1/2 transform -translate-x-1/2">
+      <div class="bg-sky-300/50 text-white text-xl md:text-2xl font-bold px-6 py-3 rounded-lg text-center">
         Lauda-Königshofen
       </div>
     </div>
 
-    <!-- Optischer Button unten -->
+    <!-- Button unten -->
     <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2">
-      <div class="bg-white text-black px-6 py-2 rounded-lg font-semibold text-sm group-hover:bg-sky-300 transition">
+      <a href="lauda.html"
+         class="bg-white text-black px-6 py-2 rounded-lg font-semibold text-sm hover:bg-emerald-300 transition">
         Zum Studio
-      </div>
+      </a>
     </div>
   </div>
-</a>
+
+</div>
 
 
   </div>
 </section>
 
 <!-- FAQ-Einträge -->
-<section class="bg-white text-black py-16 px-4" x-data="{ open: null }">
-  <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
+<section class="bg-black text-white py-16 px-4" x-data="{ open: null }">
+  <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
   <div class="max-w-3xl mx-auto">
     <h2 class="text-3xl font-bold text-center mb-10">Häufig gestellte Fragen</h2>
 
@@ -397,23 +364,17 @@
       </div>
     </div>
 
-<div x-data="{ showForm: false }">
-
-  <!-- Öffne-Button -->
-  <div class="text-center my-8">
-   <!-- Öffnet das Formular ohne Voreinstellung -->
-<button
-  @click="$store.popupForm.openWith()"
-  class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
-  Jetzt unverbindlich reservieren
-</button>
-  </div>
-
-</div>
+    <!-- CTA-Button -->
+    <div class="text-center mt-10">
+      <a href="angebot.html"
+         class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
+        Jetzt sichern
+      </a>
+    </div>
   </div>
 </section>
 
-<section class="bg-gray-100 text-black py-16 px-4">
+<section class="bg-black text-white py-16 px-4">
   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
 
     <!-- Linke Seite: Textinhalt -->
@@ -475,7 +436,7 @@
       </div>
 
       <!-- Abschlusssatz -->
-      <p class="mt-8 text-gray">
+      <p class="mt-8 text-gray-200">
         Mit dieser Erfolgsbetreuung begleiten wir Sie dauerhaft während Ihrer gesamten Trainingszeit.
       </p>
     </div>
@@ -483,147 +444,96 @@
     <!-- Rechte Seite: Platz für Bild oder Illustration -->
     <div class="flex items-center justify-center">
       <!-- Beispielbild (du kannst img/... durch dein eigenes Bild ersetzen) -->
-       <img src="img/mann_und_frau.png" alt="Mann und Frau">
-
     </div>
 
-  </div>
-</section>
-<section class="bg-white text-black py-16 px-6">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-    
-    <!-- Bildbereich -->
-    <div>
-      <!-- Platzhalter-Bild -->
-      <img src="img/sportler.png" 
-           alt="Fitnessbereich" 
-           class="w-full h-full object-cover" />
-    </div>
-    
-    <!-- Textbereich -->
-    <div>
-      <h2 class="text-4xl font-bold mb-12">
-        <span class="block">Deine</span>
-        <span class="block text-sky-300">Vorteile</span>
-      </h2>
-
-      <div class="space-y-8">
-
-        <!-- Vorteil 2 -->
-        <div>
-          <h3 class="text-2xl font-semibold mb-3 text-sky-300">Modernes Trainingsequipment</h3>
-          <p class="leading-relaxed">
-            Nutze topaktuelle TechnoGym-Geräte, vielseitige Functional-Zonen und Freihanteln – abgestimmt auf deine individuellen Ziele.
-          </p>
-        </div>
-
-        <!-- Vorteil 3 -->
-        <div>
-          <h3 class="text-2xl font-semibold mb-3 text-sky-300">Individuelles Personal Training</h3>
-          <p class="leading-relaxed">
-            Profitiere von maßgeschneiderter Betreuung, einem klaren Trainingsplan und hochwertiger Ausstattung – für deinen maximalen Erfolg.
-          </p>
-        </div>
-
-        <!-- Vorteil 4 -->
-        <div>
-          <h3 class="text-2xl font-semibold mb-3 text-sky-300">Wellness & Erholung</h3>
-          <p class="leading-relaxed">
-            Genieße nach dem Training Entspannung pur in Sauna und Wellnessbereich ausgewählter Clubs.
-          </p>
-        </div>
-      </div>
-
-      <div x-data="{ showForm: false }">
-
-  <!-- Öffne-Button -->
-  <div class="text-center my-8">
-    <!-- Öffnet das Formular ohne Voreinstellung -->
-<button
-  @click="$store.popupForm.openWith()"
-  class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
-  Jetzt unverbindlich reservieren
-</button>
-  </div>
-</div>
-    </div>
   </div>
 </section>
 
 
 <!-- Das sagen unsere Mitglieder -->
- <section class="bg-white py-16 px-6">
-  <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
+<section class="bg-black py-16 px-6">
+  <div class="w-[100px] h-px bg-white my-12 mx-auto"></div>
   <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-black mb-10">Das sagen unsere Mitglieder</h2>
-<!-- Elfsight Google Reviews | Untitled Google Reviews -->
-<script src="https://static.elfsight.com/platform/platform.js" async></script>
-<div class="elfsight-app-e3a8e9d2-0f12-47b5-96e6-be5fd3286059" data-elfsight-app-lazy></div>
- </div>
+    <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-10">Das sagen unsere Mitglieder</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+
+      <!-- Bewertung 1 -->
+      <div class="bg-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg transition">
+        <div class="flex items-center mb-4">
+          <img src="https://via.placeholder.com/60" alt="Profilbild" class="w-12 h-12 rounded-full mr-4">
+          <div>
+            <p class="font-semibold text-gray-800">Lisa M.</p>
+            <p class="text-sm text-gray-500">vor 1 Woche</p>
+          </div>
+        </div>
+        <div class="flex items-center text-yellow-400 mb-2">
+          ★★★★★
+        </div>
+        <p class="text-gray-700 text-sm">Top Studio! Die Trainer sind super freundlich und ich fühle mich rundum wohl.</p>
+      </div>
+
+      <!-- Bewertung 2 -->
+      <div class="bg-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg transition">
+        <div class="flex items-center mb-4">
+          <img src="https://via.placeholder.com/60" alt="Profilbild" class="w-12 h-12 rounded-full mr-4">
+          <div>
+            <p class="font-semibold text-gray-800">Sebastian K.</p>
+            <p class="text-sm text-gray-500">vor 2 Wochen</p>
+          </div>
+        </div>
+        <div class="flex items-center text-yellow-400 mb-2">
+          ★★★★★
+        </div>
+        <p class="text-gray-700 text-sm">Super Geräte und das 9-Wochen-Betreuungskonzept ist Gold wert!</p>
+      </div>
+
+      <!-- Bewertung 3 -->
+      <div class="bg-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg transition">
+        <div class="flex items-center mb-4">
+          <img src="https://via.placeholder.com/60" alt="Profilbild" class="w-12 h-12 rounded-full mr-4">
+          <div>
+            <p class="font-semibold text-gray-800">Maik K.</p>
+            <p class="text-sm text-gray-500">vor 4 Tagen</p>
+          </div>
+        </div>
+        <div class="flex items-center text-yellow-400 mb-2">
+          ★★★★★
+        </div>
+        <p class="text-gray-700 text-sm">Modernes Studio mit Power Plate, Solarium und toller Atmosphäre!</p>
+      </div>
+
+    </div>
+  </div>
 </section>
 
 
 
 
-
-<!-- Footer -->
-<footer class="bg-white pt-6 pb-6 px-4 text-xs text-black">
-  <div class="max-w-7xl mx-auto w-full flex flex-col items-center gap-6">
-
-    <!-- Horizontale Linie -->
-    <hr class="w-full border-t border-gray-300">
-
-    <!-- El Osta Logo: zentriert -->
-    <div class="flex justify-center items-center">
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-6 px-4 text-sm text-gray-400">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+  <!-- Rechte Seite: Copyright + Made by -->
+    <div class="text-left">
+      <p>&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
+      <p class="text-xs mt-1">Made by Maik</p>
+    </div>
+        <div class="flex-shrink-0">
       <a href="index.html">
         <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
       </a>
     </div>
-
-    <!-- Footer-Inhalt: responsive Layout -->
-    <div class="w-full flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-
-      <!-- Linke Seite: Copyright + Made by -->
-      <div class="z-10">
-        <p class="flex justify-center md:justify-start items-center">
-          Made by
-          <a href="https://fitrada.de" target="_blank" class="ml-2">
-            <img src="img/Fitrada_logo.png" alt="fitrada_logo" class="h-16 inline">
-          </a>
-        </p>
-        <p class="mt-1">&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
-        <div class="mt-1">
-          <a href="https://www.facebook.com/deineSeite" target="_blank" class="mr-2 text-xl hover:text-blue-600">
-            <i class="fab fa-facebook-square"></i>
-          </a>
-          <a href="https://www.instagram.com/deineSeite" target="_blank" class="text-xl hover:text-pink-500">
-            <i class="fab fa-instagram"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Rechte Seite: Button + Menü -->
-      <div class="flex flex-col items-center md:items-end space-y-4 z-10">
-
-        <!-- Button -->
-        <a href="Probetraining.html" class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
-          Jetzt Probetraining beantragen
-        </a>
-
-        <!-- Menü -->
-        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-base">
-          <a href="impressum.html" class="hover:text-gray-700">Impressum</a>
-          <a href="datenschutz.html" class="hover:text-gray-700">Datenschutz</a>
-          <a href="mitgliedschaft.html" class="hover:text-gray-700">Mitgliedschaft verwalten</a>
-        </div>
-
-      </div>
-
+    <!-- Linke Seite: Menü -->
+    <div class="space-y-2 md:space-y-0 md:space-x-6 md:flex">
+      <a href="impressum.html" class="block hover:text-white">Impressum</a>
+      <a href="datenschutz.html" class="block hover:text-white">Datenschutz</a>
+      <a href="mitgliedschaft.html" class="block hover:text-white">Mitgliedschaft verwalten</a>
     </div>
+
+  
+
   </div>
 </footer>
-
-
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -647,69 +557,6 @@
     }
   });
 </script>
-<!-- Zurück nach oben Button mit Icon -->
-<button onclick="scrollToTop()"
-        class="fixed bottom-4 right-4 z-50 bg-white/80 hover:bg-white text-black border border-black rounded-full p-3 shadow-lg backdrop-blur transition-all"
-        id="backToTopBtn"
-        aria-label="Nach oben scrollen">
-  <!-- Heroicon: Chevron Up -->
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-       stroke-width="2" stroke="currentColor" class="w-5 h-5">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-  </svg>
-</button>
-<!-- Popup-Formular -->
-<div x-data
-     x-show="$store.popupForm.open"
-     x-cloak
-     @keydown.escape.window="$store.popupForm.close()"
-     class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-     x-transition>
-  <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 relative">
-    <!-- Schließen -->
-    <button @click="$store.popupForm.close()"
-            class="absolute top-3 right-4 text-gray-500 hover:text-black text-2xl font-bold">&times;</button>
 
-    <h2 class="text-2xl font-bold mb-6 text-center text-black">
-      Wir reservieren dir ein Angebot völlig unverbindlich!
-    </h2>
-
-    <form action="kontakt.php" method="POST" class="space-y-4 text-black">
-      <input type="text" name="vorname" placeholder="Vorname" required
-             class="w-full border border-gray-300 rounded-lg px-4 py-2">
-      <input type="text" name="nachname" placeholder="Nachname" required
-             class="w-full border border-gray-300 rounded-lg px-4 py-2">
-      <input type="tel" name="telefon" placeholder="Telefonnummer" required
-             class="w-full border border-gray-300 rounded-lg px-4 py-2">
-      <input type="email" name="email" placeholder="E-Mail" required
-             class="w-full border border-gray-300 rounded-lg px-4 py-2">
-
-      <!-- Standort aus Store befüllen (optional) -->
-      <select name="standort" required x-model="$store.popupForm.data.standort"
-              class="w-full border border-gray-300 rounded-lg px-4 py-2">
-        <option value="" disabled :selected="!$store.popupForm.data.standort">Bevorzugter Standort wählen</option>
-        <option value="Tauberbischofsheim">Tauberbischofsheim</option>
-        <option value="Lauda-Königshofen">Lauda-Königshofen</option>
-      </select>
-
-      <div class="flex items-start gap-3">
-        <input id="dsgvo" name="dsgvo" type="checkbox" required
-               class="mt-1 h-4 w-4 border-gray-300 rounded">
-        <label for="dsgvo" class="text-sm leading-6">
-          Ich stimme der Verarbeitung meiner Daten,
-          <span class="whitespace-nowrap">
-            gemäß der <a href="datenschutz.html"
-                         class="underline text-sky-600 hover:text-sky-800 inline">Datenschutzerklärung</a> zu.
-          </span>
-        </label>
-      </div>
-
-      <button type="submit"
-              class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition w-full">
-        Weiter
-      </button>
-    </form>
-  </div>
-</div>
 </body>
 </html>

@@ -7,6 +7,24 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script>
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.store('popupForm', {
+      open: false,
+      data: { standort: '' },              // Platz für optionale Werte
+      openWith(opts = {}) {
+        this.data = { ...this.data, ...opts };
+        this.open = true;
+      },
+      close() { this.open = false; }
+    });
+  });
+</script>
   <style>
     body { font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif; }
     
@@ -128,62 +146,230 @@
 
 
 
+<!-- Preise & Pakete Section -->
+  <section class="bg-white text-black py-16 px-4" x-data="{
+    packages: [
+      {
+        id: 'tbb',
+        title: 'Fitnessstudio Tauberbischofsheim',
+        duration: '1 oder 2 Jahre',
+        price: '1 Jahr: 49 € / Monat | 2 Jahre: 39 € / Monat',
+        details: '+ Startpaket: 48,00 €'
+      },
+      {
+        id: 'lauda',
+        title: 'Fitnessstudio Lauda-Königshofen',
+        duration: '1 oder 2 Jahre',
+        price: '1 Jahr: 59 € / Monat | 2 Jahre: 49 € / Monat',
+        details: ''
+      }
+    ],
+    selected: null
+  }" x-init="selected = packages[0]">
 
-  <!-- Preise: -->
-<section class="bg-white text-black py-16 px-6">
-  <div class="max-w-5xl mx-auto space-y-16">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-center text-4xl font-extrabold mb-6">Unsere Pakete</h2>
 
-    <!-- Studio Tauberbischofsheim -->
-    <div class="text-center">
-      <h2 class="text-3xl md:text-4xl font-extrabold mb-6 text-black">Studio Tauberbischofsheim</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border border-black rounded-xl overflow-hidden">
+        <template x-for="pkg in packages" :key="pkg.id">
+          <button @click="selected = pkg"
+            :class="{'bg-gray-300 border-gray-300': selected.id === pkg.id, 'bg-white border-gray-200': selected.id !== pkg.id}"
+            class="flex flex-col justify-center items-center border-r border-b text-center px-4 py-6 h-40 transition duration-300 w-full">
+            <h3 class="font-semibold text-sm text-center" x-text="pkg.title"></h3>
+          </button>
+        </template>
 
-      <!-- Angebot -->
-      <div class="bg-sky-300/10 border border-sky-300 rounded-xl p-6 mb-8 shadow-md">
-        <h3 class="text-xl font-semibold mb-2 text-sky-300">9 Wochen-Fitness-Challenge</h3>
-        <p class="text-lg mb-1 text-black">Nur <span class="font-bold">9,90 € / Woche</span></p>
-        <p class="text-sm text-sky-150 italic">* einmaliges Startpaket: 48,00 €</p>
+        <div class="col-span-1 md:col-span-2 bg-gray-100 p-6 text-left">
+          <template x-if="selected.id === 'tbb'">
+            <div>
+              <h3 class="text-2xl font-bold text-sky-700 mb-4">Leistungen</h3>
+              <ul class="list-disc list-inside space-y-1 text-gray-800 mb-6">
+                <li>9 Wochen-Fitness-Betreuungskonzept</li>
+                <li>Krafttraining</li>
+                <li>Ausdauertraining</li>
+                <li>Power Plate</li>
+                <li>Solarium (nicht im Preis enthalten)</li>
+                <li>Sauna (nicht im Preis enthalten)</li>
+                <li>Squash (nicht im Preis enthalten)</li>
+                <li>Tennis (nicht im Preis enthalten)</li>
+                <li>Fitnesscheck + Trainingsbetreuung</li>
+                <li>Trainingsapp</li>
+                <li>Getränke Flat zzgl. 7,99 € pro Monat (1 Jahr Gratis)</li>
+              </ul>
+              <h4 class="text-xl font-semibold text-sky-700 mb-2">Laufzeit & Preis</h4>
+              <div class="overflow-x-auto mb-2">
+                <table class="w-full table-auto border border-gray-300 text-left text-sm">
+                  <thead>
+                    <tr class="bg-white text-gray-700">
+                      <th class="border border-gray-300 px-4 py-2">1 Jahr</th>
+                      <th class="border border-gray-300 px-4 py-2">2 Jahre</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-gray-50">
+                      <td class="border border-gray-300 px-4 py-2">49 € / Monat</td>
+                      <td class="border border-gray-300 px-4 py-2">39 € / Monat</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="text-xs text-gray-600 mb-4">* Kündigung 1 Monat vor Vertragsende</p>
+             <div x-data="{ showForm: false }">
+
+  <!-- Öffne-Button -->
+  <div class="text-center my-8">
+  <!-- Öffnet das Formular ohne Voreinstellung -->
+<button
+  @click="$store.popupForm.openWith()"
+  class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
+  Jetzt unverbindlich reservieren
+</button>
+  </div>
+</div>
+            </div>
+          </template>
+
+          <template x-if="selected.id === 'lauda'">
+            <div>
+              <h3 class="text-2xl font-bold text-sky-700 mb-4">Leistungen</h3>
+              <ul class="list-disc list-inside space-y-1 text-gray-800 mb-6">
+                <li>9 Wochen-Fitness-Betreuungskonzept</li>
+                <li>Krafttraining</li>
+                <li>Ausdauertraining</li>
+                <li>Power Plate</li>
+                <li>Solarium (Nicht im Preis enthalten)</li>
+                <li>Fitnesscheck + Trainingsbetreuung</li>
+                <li>Trainingsapp</li>
+                <li>Getränke Flat zzgl. 7,99 € pro Monat (1 Jahr Gratis)</li>
+              </ul>
+              <h4 class="text-xl font-semibold text-sky-700 mb-2">Laufzeit & Preis</h4>
+              <div class="overflow-x-auto mb-2">
+                <table class="w-full table-auto border border-gray-300 text-left text-sm">
+                  <thead>
+                    <tr class="bg-white text-gray-700">
+                      <th class="border border-gray-300 px-4 py-2">1 Jahr</th>
+                      <th class="border border-gray-300 px-4 py-2">2 Jahre</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-gray-50">
+                      <td class="border border-gray-300 px-4 py-2">59 € / Monat</td>
+                      <td class="border border-gray-300 px-4 py-2">49 € / Monat</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="text-xs text-gray-600 mb-4">* Kündigung 1 Monat vor Vertragsende</p>
+            <div x-data="{ showForm: false }">
+
+  <!-- Öffne-Button -->
+  <div class="text-center my-8">
+  <button
+  @click="$store.popupForm.openWith()"
+  class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
+  Jetzt unverbindlich reservieren
+</button>
+  </div>
+  </div>
+</div>
+            </div>
+          </template>
+        </div>
       </div>
 
-      <!-- Reguläre Preise -->
-      <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-700">
-        <h3 class="text-xl font-semibold mb-4 text-sky-300">Reguläre Preise</h3>
-        <div class="flex flex-col md:flex-row justify-center gap-6 text-white">
-          <div class="p-4 border border-sky-300 rounded-lg bg-black/40">
-            <p class="font-bold text-lg mb-1">24 Monate</p>
-            <p class="text-3xl font-extrabold">49,00 €</p>
-            <p class="text-sm text-sky-150">pro Monat</p>
-          </div>
-          <div class="p-4 border border-sky-300 rounded-lg bg-black/40">
-            <p class="font-bold text-lg mb-1">12 Monate</p>
-            <p class="text-3xl font-extrabold">59,00 €</p>
-            <p class="text-sm text-sky-150">pro Monat</p>
-          </div>
+      <div class="mt-6 text-sm text-gray-700 text-center space-y-1">
+        <p>+ 39,00 € einmalige Startpaket Gebühr</p>
+        <p>Das Startpaket enthält: Erstgespräch, Trainingsapp, Trainingsplanerstellung, Geräteeinweisung, Verwaltungsarbeiten, Flatrate-Flasche</p>
+        <p>Alle Verträge haben eine Kündigungsfrist von 1 Monat zum Ende der Laufzeit.</p>
+        <p>* Alle Preise inkl. gesetzl. Mehrwertsteuer</p>
+      </div>
+    </div>
+  </section>
+
+
+
+
+<!-- FAQ-Einträge -->
+<section class="bg-white text-black py-16 px-4" x-data="{ open: null }">
+  <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-10">Häufig gestellte Fragen</h2>
+
+    
+    <div class="space-y-4 text-black">
+      
+      <!-- Frage 1 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 1 ? open = null : open = 1"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Wie genau läuft die Aktion ab?</span>
+          <span class="text-xl font-bold" x-text="open === 1 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 1" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Du meldest dich unverbindlich über das Formular an, wir reservieren dein Angebot und beraten dich persönlich bei deinem ersten Studiobesuch. Danach entscheidest du, ob du starten möchtest.
+        </div>
+      </div>
+
+      <!-- Frage 2 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 2 ? open = null : open = 2"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Was kann ich alles nutzen?</span>
+          <span class="text-xl font-bold" x-text="open === 2 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 2" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Du hast Zugang zu allen Fitnessgeräten, der PowerPlate, dem Solarium, den Kursen sowie unserer Sauna. Alles ist im Aktionszeitraum inklusive.
+        </div>
+      </div>
+
+      <!-- Frage 3 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 3 ? open = null : open = 3"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Kann ich in allen EL OSTA Studios trainieren?</span>
+          <span class="text-xl font-bold" x-text="open === 3 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 3" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Nein. Dieses Angebot gilt exklusiv für unsere Studios in Tauberbischofsheim und Lauda-Königshofen.
+        </div>
+      </div>
+
+      <!-- Frage 4 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 4 ? open = null : open = 4"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Welche Highlights gibt es noch?</span>
+          <span class="text-xl font-bold" x-text="open === 4 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 4" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Unsere Highlights: Technogym Premiumgeräte, individuell betreute Trainingspläne, Squash- und Tennisbereiche, Powerplate-Training und mehr!
+        </div>
+      </div>
+
+      <!-- Frage 5 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <button @click="open === 5 ? open = null : open = 5"
+                class="w-full text-left px-6 py-4 flex justify-between items-center">
+          <span class="font-medium">Wie kann ich meinen Club testen?</span>
+          <span class="text-xl font-bold" x-text="open === 5 ? '−' : '+'"></span>
+        </button>
+        <div x-show="open === 5" x-transition class="px-6 pb-4 text-gray-700 text-sm">
+          Fülle einfach das Formular aus – wir melden uns und vereinbaren einen unverbindlichen Beratungstermin, bei dem du das Studio kennenlernen kannst.
         </div>
       </div>
     </div>
 
-    <!-- Studio Lauda -->
-    <div class="text-center">
-      <h2 class="text-3xl md:text-4xl font-extrabold mb-6 text-black">Studio Lauda</h2>
+  <div x-data="{ showForm: false }">
 
-      <!-- Reguläre Preise -->
-      <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-700">
-        <h3 class="text-xl font-semibold mb-4 text-sky-300">Reguläre Preise</h3>
-        <div class="flex flex-col md:flex-row justify-center gap-6 text-white">
-          <div class="p-4 border border-sky-300 rounded-lg bg-black/40">
-            <p class="font-bold text-lg mb-1">24 Monate</p>
-            <p class="text-3xl font-extrabold">49,00 €</p>
-            <p class="text-sm text-sky-150">pro Monat</p>
-          </div>
-          <div class="p-4 border border-sky-300 rounded-lg bg-black/40">
-            <p class="font-bold text-lg mb-1">12 Monate</p>
-            <p class="text-3xl font-extrabold">59,00 €</p>
-            <p class="text-sm text-sky-150">pro Monat</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
+  <!-- Öffne-Button -->
+  <div class="text-center my-8">
+  <button
+  @click="$store.popupForm.openWith()"
+  class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
+  Jetzt unverbindlich reservieren
+</button>
+  </div>
+</div>
   </div>
 </section>
 
@@ -191,28 +377,63 @@
 
 
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 py-6 px-4 text-sm text-gray-400">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-  <!-- Rechte Seite: Copyright + Made by -->
-    <div class="text-left">
-      <p>&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
-      <p class="text-xs mt-1">Made by Maik</p>
-    </div>
-        <div class="flex-shrink-0">
+
+
+
+<!-- Footer -->
+<footer class="bg-white pt-6 pb-6 px-4 text-xs text-black">
+  <div class="max-w-7xl mx-auto w-full flex flex-col items-center gap-6">
+
+    <!-- Horizontale Linie -->
+    <hr class="w-full border-t border-gray-300">
+
+    <!-- El Osta Logo: zentriert -->
+    <div class="flex justify-center items-center">
       <a href="index.html">
         <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
       </a>
     </div>
-    <!-- Linke Seite: Menü -->
-    <div class="space-y-2 md:space-y-0 md:space-x-6 md:flex">
-      <a href="impressum.html" class="block hover:text-white">Impressum</a>
-      <a href="datenschutz.html" class="block hover:text-white">Datenschutz</a>
-      <a href="mitgliedschaft.html" class="block hover:text-white">Mitgliedschaft verwalten</a>
+
+    <!-- Footer-Inhalt: responsive Layout -->
+    <div class="w-full flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+
+      <!-- Linke Seite: Copyright + Made by -->
+      <div class="z-10">
+        <p class="flex justify-center md:justify-start items-center">
+          Made by
+          <a href="https://fitrada.de" target="_blank" class="ml-2">
+            <img src="img/Fitrada_logo.png" alt="fitrada_logo" class="h-16 inline">
+          </a>
+        </p>
+        <p class="mt-1">&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
+        <div class="mt-1">
+          <a href="https://www.facebook.com/deineSeite" target="_blank" class="mr-2 text-xl hover:text-blue-600">
+            <i class="fab fa-facebook-square"></i>
+          </a>
+          <a href="https://www.instagram.com/deineSeite" target="_blank" class="text-xl hover:text-pink-500">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Rechte Seite: Button + Menü -->
+      <div class="flex flex-col items-center md:items-end space-y-4 z-10">
+
+        <!-- Button -->
+        <a href="Probetraining.html" class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
+          Jetzt Probetraining beantragen
+        </a>
+
+        <!-- Menü -->
+        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-base">
+          <a href="impressum.html" class="hover:text-gray-700">Impressum</a>
+          <a href="datenschutz.html" class="hover:text-gray-700">Datenschutz</a>
+          <a href="mitgliedschaft.html" class="hover:text-gray-700">Mitgliedschaft verwalten</a>
+        </div>
+
+      </div>
+
     </div>
-
-  
-
   </div>
 </footer>
 
@@ -238,6 +459,69 @@
     }
   });
 </script>
+<!-- Zurück nach oben Button mit Icon -->
+<button onclick="scrollToTop()"
+        class="fixed bottom-4 right-4 z-50 bg-white/80 hover:bg-white text-black border border-black rounded-full p-3 shadow-lg backdrop-blur transition-all"
+        id="backToTopBtn"
+        aria-label="Nach oben scrollen">
+  <!-- Heroicon: Chevron Up -->
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+       stroke-width="2" stroke="currentColor" class="w-5 h-5">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+  </svg>
+</button>
+<!-- Popup-Formular -->
+<div x-data
+     x-show="$store.popupForm.open"
+     x-cloak
+     @keydown.escape.window="$store.popupForm.close()"
+     class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+     x-transition>
+  <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 relative">
+    <!-- Schließen -->
+    <button @click="$store.popupForm.close()"
+            class="absolute top-3 right-4 text-gray-500 hover:text-black text-2xl font-bold">&times;</button>
 
+    <h2 class="text-2xl font-bold mb-6 text-center text-black">
+      Wir reservieren dir ein Angebot völlig unverbindlich!
+    </h2>
+
+    <form action="kontakt.php" method="POST" class="space-y-4 text-black">
+      <input type="text" name="vorname" placeholder="Vorname" required
+             class="w-full border border-gray-300 rounded-lg px-4 py-2">
+      <input type="text" name="nachname" placeholder="Nachname" required
+             class="w-full border border-gray-300 rounded-lg px-4 py-2">
+      <input type="tel" name="telefon" placeholder="Telefonnummer" required
+             class="w-full border border-gray-300 rounded-lg px-4 py-2">
+      <input type="email" name="email" placeholder="E-Mail" required
+             class="w-full border border-gray-300 rounded-lg px-4 py-2">
+
+      <!-- Standort aus Store befüllen (optional) -->
+      <select name="standort" required x-model="$store.popupForm.data.standort"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2">
+        <option value="" disabled :selected="!$store.popupForm.data.standort">Bevorzugter Standort wählen</option>
+        <option value="Tauberbischofsheim">Tauberbischofsheim</option>
+        <option value="Lauda-Königshofen">Lauda-Königshofen</option>
+      </select>
+
+      <div class="flex items-start gap-3">
+        <input id="dsgvo" name="dsgvo" type="checkbox" required
+               class="mt-1 h-4 w-4 border-gray-300 rounded">
+        <label for="dsgvo" class="text-sm leading-6">
+          Ich stimme der Verarbeitung meiner Daten,
+          <span class="whitespace-nowrap">
+            gemäß der <a href="datenschutz.html"
+                         class="underline text-sky-600 hover:text-sky-800 inline">Datenschutzerklärung</a> zu.
+          </span>
+        </label>
+      </div>
+
+      <button type="submit"
+              class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition w-full">
+        Weiter
+      </button>
+    </form>
+  </div>
+</div>
 </body>
 </html>

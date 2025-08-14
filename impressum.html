@@ -6,6 +6,11 @@
   <title>El Osta Gym</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
   <style>
     body { font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif; }
   </style>
@@ -120,33 +125,132 @@
 
 </section>
 
+<section class="bg-gray-100 text-black py-12 px-6">
+  <div class="max-w-3xl mx-auto text-sm leading-relaxed space-y-10">
 
+    <!-- LAUDA -->
+    <div class="space-y-4">
+      <h3 class="text-xl font-semibold">Fitnessstudio Lauda-Königshofen</h3>
 
+      <div class="space-y-1">
+        <p class="font-semibold">simnet24 GmbH</p>
+        <p>i-Park Tauberfranken 6<br>97922 Lauda Königshofen</p>
+      </div>
 
+      <div class="space-y-1">
+        <p><strong>Telefon:</strong> <a href="tel:093435091680" class="text-blue-600 hover:underline">09343 5091680</a></p>
+        <p><strong>E-Mail:</strong> <a href="mailto:info@elostagym.de" class="text-blue-600 hover:underline">info@elostagym.de</a></p>
+        <p><strong>Internet:</strong> <a href="https://www.elostagym.de" target="_blank" rel="noopener" class="text-blue-600 hover:underline">www.elostagym.de</a></p>
+      </div>
 
+      <div class="space-y-1">
+        <p><strong>Handelsregister:</strong><br>
+        HRB 719788 – Amtsgericht Mannheim</p>
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 py-6 px-4 text-sm text-gray-400">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-  <!-- Rechte Seite: Copyright + Made by -->
-    <div class="text-left">
-      <p>&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
-      <p class="text-xs mt-1">Made by Maik</p>
+        <p><strong>Vertretungsberechtigter Geschäftsführer:</strong><br>
+        Salem El Osta</p>
+
+        <p><strong>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:</strong><br>
+        DE 295435349</p>
+      </div>
     </div>
-        <div class="flex-shrink-0">
+
+    <!-- TAUBERBISCHOFSHEIM -->
+    <div class="space-y-4">
+      <h3 class="text-xl font-semibold">Fitnessstudio Tauberbischofsheim</h3>
+
+      <div class="space-y-1">
+        <p class="font-semibold">Salem El Osta</p>
+        <p>Am Bild 39<br>Tauberbischofsheim</p>
+      </div>
+
+      <div class="space-y-1">
+        <p><strong>Telefon:</strong> <a href="tel:093417040" class="text-blue-600 hover:underline">09341 7040</a></p>
+        <p><strong>Telefax:</strong> 09341 848051</p>
+        <p><strong>E-Mail:</strong> <a href="mailto:sportparktbb@yahoo.de" class="text-blue-600 hover:underline">sportparktbb@yahoo.de</a></p>
+        <p><strong>Internet:</strong> <a href="https://www.sportpark-tauber.de" target="_blank" rel="noopener" class="text-blue-600 hover:underline">www.sportpark-tauber.de</a></p>
+        <p><strong>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:</strong><br>
+        DE 283177251</p>
+      </div>
+    </div>
+
+    <!-- EU-Streitschlichtung -->
+    <div class="space-y-2 pt-4 border-t border-gray-300">
+      <p><strong>EU-Streitschlichtung:</strong></p>
+      <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:</p>
+      <p>
+        <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener" class="text-blue-600 hover:underline">
+          https://ec.europa.eu/consumers/odr/
+        </a>
+      </p>
+    </div>
+
+    <p class="text-gray-600 italic">
+      Dieses Impressum wurde erstellt und wird aktualisiert mit der Technologie der janolaw GmbH.
+    </p>
+  </div>
+</section>
+
+
+
+
+
+
+
+<!-- Footer -->
+<footer class="bg-white pt-6 pb-6 px-4 text-xs text-black">
+  <div class="max-w-7xl mx-auto w-full flex flex-col items-center gap-6">
+
+    <!-- Horizontale Linie -->
+    <hr class="w-full border-t border-gray-300">
+
+    <!-- El Osta Logo: zentriert -->
+    <div class="flex justify-center items-center">
       <a href="index.html">
         <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
       </a>
     </div>
-    <!-- Linke Seite: Menü -->
-    <div class="space-y-2 md:space-y-0 md:space-x-6 md:flex">
-      <a href="impressum.html" class="block hover:text-white">Impressum</a>
-      <a href="datenschutz.html" class="block hover:text-white">Datenschutz</a>
-      <a href="mitgliedschaft.html" class="block hover:text-white">Mitgliedschaft verwalten</a>
+
+    <!-- Footer-Inhalt: responsive Layout -->
+    <div class="w-full flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+
+      <!-- Linke Seite: Copyright + Made by -->
+      <div class="z-10">
+        <p class="flex justify-center md:justify-start items-center">
+          Made by
+          <a href="https://fitrada.de" target="_blank" class="ml-2">
+            <img src="img/Fitrada_logo.png" alt="fitrada_logo" class="h-16 inline">
+          </a>
+        </p>
+        <p class="mt-1">&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
+        <div class="mt-1">
+          <a href="https://www.facebook.com/deineSeite" target="_blank" class="mr-2 text-xl hover:text-blue-600">
+            <i class="fab fa-facebook-square"></i>
+          </a>
+          <a href="https://www.instagram.com/deineSeite" target="_blank" class="text-xl hover:text-pink-500">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Rechte Seite: Button + Menü -->
+      <div class="flex flex-col items-center md:items-end space-y-4 z-10">
+
+        <!-- Button -->
+        <a href="Probetraining.html" class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
+          Jetzt Probetraining beantragen
+        </a>
+
+        <!-- Menü -->
+        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-base">
+          <a href="impressum.html" class="hover:text-gray-700">Impressum</a>
+          <a href="datenschutz.html" class="hover:text-gray-700">Datenschutz</a>
+          <a href="mitgliedschaft.html" class="hover:text-gray-700">Mitgliedschaft verwalten</a>
+        </div>
+
+      </div>
+
     </div>
-
-  
-
   </div>
 </footer>
 
@@ -172,6 +276,16 @@
     }
   });
 </script>
-
+<!-- Zurück nach oben Button mit Icon -->
+<button onclick="scrollToTop()"
+        class="fixed bottom-4 right-4 z-50 bg-white/80 hover:bg-white text-black border border-black rounded-full p-3 shadow-lg backdrop-blur transition-all"
+        id="backToTopBtn"
+        aria-label="Nach oben scrollen">
+  <!-- Heroicon: Chevron Up -->
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+       stroke-width="2" stroke="currentColor" class="w-5 h-5">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+  </svg>
+</button>
 </body>
 </html>
