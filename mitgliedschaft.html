@@ -6,11 +6,17 @@
   <title>El Osta Gym</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
   <style>
     body { font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif; }
   </style>
    <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-white text-black scroll-smooth">
 
@@ -75,14 +81,9 @@
 
 
       <!-- Desktop-Navigation -->
-      <nav x-show="!collapsed"
-           x-transition:enter="transition ease-out duration-300"
-           x-transition:enter-start="opacity-0 -translate-x-4"
-           x-transition:enter-end="opacity-100 translate-x-0"
-           x-transition:leave="transition ease-in duration-200"
-           x-transition:leave-start="opacity-100 translate-x-0"
-           x-transition:leave-end="opacity-0 -translate-x-4"
-           class="hidden md:flex space-x-10 text-base font-medium">
+   <nav
+  class="hidden md:flex md:space-x-12 lg:space-x-4 text-base font-medium"
+>
         <a href="index.html" class="text-white hover:text-sky-300">Home</a>
         <a href="preise.html" class="text-white hover:text-sky-300">Preise</a>
         <a href="tbb.html" class="text-white hover:text-sky-300">Studio Tauberbischofsheim</a>
@@ -112,7 +113,7 @@
 
       <!-- Abstand zum oberen Kasten -->
       <div class="mt-8 mb-6">
-        <span class="text-6xl md:text-8xl font-extrabold text-white">Mitgliedschaft kündigen</span>
+        <span class="text-6xl md:text-8xl font-extrabold text-white"></span>
       </div>
 
 
@@ -120,6 +121,36 @@
 
 </section>
 
+</section>
+<section class="max-w-3xl mx-auto py-16 px-4">
+    <h1 class="text-3xl font-bold mb-6 text-center">Jetzt Mitgliedschaft kündigen</h1>
+<form action="mitgliedschaft.php" method="POST" class="space-y-6 bg-gray-100 p-6 rounded-lg shadow-md">
+  <div>
+    <label for="name" class="block font-semibold mb-1">Name</label>
+    <input type="text" name="name" id="name" required class="w-full px-4 py-2 border rounded-md" />
+  </div>
+
+  <div>
+    <label for="email" class="block font-semibold mb-1">E-Mail</label>
+    <input type="email" name="email" id="email" required class="w-full px-4 py-2 border rounded-md" />
+  </div>
+
+  <div>
+    <label for="nachricht" class="block font-semibold mb-1">Nachricht (optional)</label>
+    <textarea name="nachricht" id="nachricht" rows="4" class="w-full px-4 py-2 border rounded-md"></textarea>
+  </div>
+<div class="flex items-start">
+  <input type="checkbox" name="dsgvo" id="dsgvo" required class="mt-1 mr-2">
+  <label for="dsgvo" class="text-sm">
+    Ich stimme der Verarbeitung meiner Daten gemäß der
+    <a href="datenschutz.html" class="underline text-sky-600 hover:text-sky-800">Datenschutzerklärung</a> zu.
+  </label>
+</div>
+  <button type="submit" class="bg-sky-300 hover:bg-sky-700 text-black font-semibold px-6 py-3 rounded-md">
+    Anfrage absenden
+  </button>
+</form>
+  </section>
 
 
 
@@ -127,29 +158,60 @@
 
 
 
+<!-- Footer -->
+<footer class="bg-white pt-6 pb-6 px-4 text-xs text-black">
+  <div class="max-w-7xl mx-auto w-full flex flex-col items-center gap-6">
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 py-6 px-4 text-sm text-gray-400">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-  <!-- Rechte Seite: Copyright + Made by -->
-    <div class="text-left">
-      <p>&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
-      <p class="text-xs mt-1">Made by Maik</p>
-    </div>
-        <div class="flex-shrink-0">
+    <!-- Horizontale Linie -->
+    <hr class="w-full border-t border-gray-300">
+
+    <!-- El Osta Logo: zentriert -->
+    <div class="flex justify-center items-center">
       <a href="index.html">
         <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
       </a>
     </div>
-    <!-- Linke Seite: Menü -->
-    <div class="space-y-2 md:space-y-0 md:space-x-6 md:flex">
-      <a href="impressum.html" class="block hover:text-white">Impressum</a>
-      <a href="datenschutz.html" class="block hover:text-white">Datenschutz</a>
-      <a href="mitgliedschaft.html" class="block hover:text-white">Mitgliedschaft verwalten</a>
+
+    <!-- Footer-Inhalt: responsive Layout -->
+    <div class="w-full flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+
+      <!-- Linke Seite: Copyright + Made by -->
+      <div class="z-10">
+        <p class="flex justify-center md:justify-start items-center">
+          Made by
+          <a href="https://fitrada.de" target="_blank" class="ml-2">
+            <img src="img/fitrada_logo.png" alt="fitrada_logo" class="h-16 inline">
+          </a>
+        </p>
+        <p class="mt-1">&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
+        <div class="mt-1">
+        <a href="https://www.facebook.com/elostagym.tauberbischofsheim/" target="_blank" class="mr-2 text-xl hover:text-blue-600">
+            <i class="fab fa-facebook-square"></i>
+          </a>
+          <a href="https://www.instagram.com/elostagym.tauberbischofsheim" target="_blank" class="text-xl hover:text-pink-500">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Rechte Seite: Button + Menü -->
+      <div class="flex flex-col items-center md:items-end space-y-4 z-10">
+
+        <!-- Button -->
+        <a href="probetraining.html" class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
+          Jetzt Probetraining beantragen
+        </a>
+
+        <!-- Menü -->
+        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-base">
+          <a href="impressum.html" class="hover:text-gray-700">Impressum</a>
+          <a href="datenschutz.html" class="hover:text-gray-700">Datenschutz</a>
+          <a href="mitgliedschaft.html" class="hover:text-gray-700">Mitgliedschaft verwalten</a>
+        </div>
+
+      </div>
+
     </div>
-
-  
-
   </div>
 </footer>
 
@@ -175,6 +237,16 @@
     }
   });
 </script>
-
+<!-- Zurück nach oben Button mit Icon -->
+<button onclick="scrollToTop()"
+        class="fixed bottom-4 right-4 z-50 bg-white/80 hover:bg-white text-black border border-black rounded-full p-3 shadow-lg backdrop-blur transition-all"
+        id="backToTopBtn"
+        aria-label="Nach oben scrollen">
+  <!-- Heroicon: Chevron Up -->
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+       stroke-width="2" stroke="currentColor" class="w-5 h-5">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+  </svg>
+</button>
 </body>
 </html>

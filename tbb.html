@@ -6,11 +6,31 @@
   <title>El Osta Gym</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.store('popupForm', {
+      open: false,
+      data: { standort: '' },              // Platz für optionale Werte
+      openWith(opts = {}) {
+        this.data = { ...this.data, ...opts };
+        this.open = true;
+      },
+      close() { this.open = false; }
+    });
+  });
+</script>
   <style>
     body { font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif; }
+    [x-cloak] { display: none !important; }
   </style>
    <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
@@ -20,7 +40,7 @@
   <header class="absolute top-0 left-0 w-full z-50 bg-transparent text-white">
     <div class="max-w-7xl mx-auto flex items-center justify-between"></div>
 <!-- Mobile-Menü: nur sichtbar auf kleinen Geräten -->
-<div x-show="collapsed"
+<div x-show="collapsed" x-cloak
      x-transition:enter="transition ease-out duration-300"
      x-transition:enter-start="-translate-x-full opacity-0"
      x-transition:enter-end="translate-x-0 opacity-100"
@@ -77,14 +97,9 @@
 
 
       <!-- Desktop-Navigation -->
-      <nav x-show="!collapsed"
-           x-transition:enter="transition ease-out duration-300"
-           x-transition:enter-start="opacity-0 -translate-x-4"
-           x-transition:enter-end="opacity-100 translate-x-0"
-           x-transition:leave="transition ease-in duration-200"
-           x-transition:leave-start="opacity-100 translate-x-0"
-           x-transition:leave-end="opacity-0 -translate-x-4"
-           class="hidden md:flex space-x-10 text-base font-medium">
+<nav
+  class="hidden md:flex md:space-x-12 lg:space-x-4 text-base font-medium"
+>
         <a href="index.html" class="text-white hover:text-sky-300">Home</a>
         <a href="preise.html" class="text-white hover:text-sky-300">Preise</a>
         <a href="tbb.html" class="text-white hover:text-sky-300">Studio Tauberbischofsheim</a>
@@ -104,7 +119,7 @@
 
 
 
-<section class="relative h-[70vh] bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(255, 255, 255, 0.3) 80%, rgba(255, 255, 255, 1) 100%), url('img/main.png');">
+<section class="relative h-[70vh] bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(255, 255, 255, 0.3) 80%, rgba(255, 255, 255, 1) 100%), url('img/main_tbb.jpg');">
   <!-- Overlay -->
   <div class="absolute inset-0 bg-black/3"></div>
 
@@ -130,51 +145,12 @@
 
   <!-- Öffne-Button -->
   <div class="text-center my-8">
-    <button @click="showForm = true"
-            class="bg-white text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
-      Jetzt unverbindlich reservieren
-    </button>
-  </div>
-
-  <!-- Popup-Formular -->
-  <div x-show="showForm" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" x-transition>
-    <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 relative">
-      <!-- Schließen -->
-      <button @click="showForm = false"
-              class="absolute top-3 right-4 text-gray-500 hover:text-black text-2xl font-bold">&times;</button>
-
-      <h2 class="text-2xl font-bold mb-6 text-center text-black">
-        Wir reservieren dir ein Angebot völlig unverbindlich!
-      </h2>
-
-      <form action="kontakt.php" method="POST" class="space-y-4 text-black">
-        <input type="text" name="vorname" placeholder="Vorname" required
-               class="w-full border border-gray-300 rounded-lg px-4 py-2">
-        <input type="text" name="nachname" placeholder="Nachname" required
-               class="w-full border border-gray-300 rounded-lg px-4 py-2">
-        <input type="tel" name="telefon" placeholder="Telefonnummer" required
-               class="w-full border border-gray-300 rounded-lg px-4 py-2">
-        <input type="email" name="email" placeholder="E-Mail" required
-               class="w-full border border-gray-300 rounded-lg px-4 py-2">
-
-        <select name="standort" required
-                class="w-full border border-gray-300 rounded-lg px-4 py-2">
-          <option value="" disabled selected>Bevorzugter Standort wählen</option>
-          <option value="Tauberbischofsheim">Tauberbischofsheim</option>
-          <option value="Lauda-Königshofen">Lauda-Königshofen</option>
-        </select>
-
-        <label class="flex items-start text-sm text-gray-700">
-          <input type="checkbox" name="dsgvo" required class="mr-2 mt-1">
-          Ich stimme der Verarbeitung meiner Daten gemäß der <a href="datenschutz.html" class="underline text-sky-400">Datenschutzerklärung</a> zu.
-        </label>
-
-        <button type="submit"
-                class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition w-full">
-          Weiter
-        </button>
-      </form>
-    </div>
+<!-- Öffnet das Formular ohne Voreinstellung -->
+<button
+  @click="$store.popupForm.openWith()"
+  class="bg-white text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
+  Jetzt unverbindlich reservieren
+</button>
   </div>
 </div>
 
@@ -189,9 +165,7 @@
 <section class="bg-white text-black py-16 px-4">
   <div class="max-w-6xl mx-auto text-center">
 
-  
-
-    <div class="inline-flex flex-col md:flex-row gap-80 items-start justify-center text-left">
+    <div class="flex flex-col md:flex-row items-center md:items-start justify-center text-center md:text-left gap-y-10 md:gap-x-32">
       
       <!-- Kontaktdaten -->
       <div class="space-y-2">
@@ -221,69 +195,27 @@
   </div>
 </section>
 
-<section class="bg-gray-100 text-black py-24 px-6">
-  <div class="max-w-5xl mx-auto text-center">
-    <h2 class="text-4xl md:text-5xl font-bold mb-8">Angebot</h2>
-    <p class="text-lg md:text-xl mb-6 font-semibold">
-      <span class="text-sky-300">EL OSTA GYM</span> 9 Wochen-Fitness-Challenge mit Erfolgsgarantie
-    </p>
-    <p class="text-2xl font-bold text-sky-300 mb-2">für nur 9,90 €/Woche*</p>
-    <p class="text-sm text-black-300 mb-10 max-w-2xl mx-auto">
-      Damit Sie die Katze nicht im Sack kaufen, bieten wir als einziger Anbieter in der Region für Neumitglieder eine einmalige Probezeit von 9 Wochen für nur 9,90 €/Woche an. So können Sie unser Betreuungskonzept 9 Wochen lang in Ruhe testen.
-    </p>
-
-    <!-- Leistungen Box -->
-    <div class="bg-white text-black rounded-2xl shadow-lg p-8 max-w-3xl mx-auto text-left">
-      <h3 class="text-xl font-bold mb-4">Inklusive Leistungen während der 9 Wochen:</h3>
-      <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm list-disc list-inside text-gray-800">
-        <li>Trainings-App</li>
-        <li>2–3 × Körperanalyse</li>
-        <li>2 × Krafttest</li>
-        <li>Trainingsplan</li>
-        <li>Getränke-Flat</li>
-        <li>Duschen</li>
-        <li>Power Plate Massage</li>
-        <li>Trainingsbetreuung</li>
-      </ul>
-      <p class="text-xs text-gray-500 mt-6">
-        * Es fällt ein einmaliges Startpaket in Höhe von <strong>48,00 €</strong> an.
-      </p>
-    </div>
-
-    <!-- Call-to-Action -->
-    <div class="mt-10">
-      <a href="#kontakt" class="inline-block bg-sky-300 text-black font-bold py-3 px-6 rounded-xl hover:bg-green-400 transition">
-        Jetzt starten
-      </a>
-    </div>
-  </div>
-</section>
-
-
-
-
-
 
 <!-- Unsere Leistungen -->
-<section class="bg-white text-black py-16 px-4" 
+<section class="bg-gray-100 text-black py-16 px-4" 
          x-data="{ 
            active: null, 
            currentSlide: 0, 
            slides: [
-             { img: 'img/selection-pro.jpg', title: '9 Wochen Betreuung' },
+         { img: 'img/selection-pro.jpg', title: '9 Wochen Betreuung' },
              { img: 'img/pure-strength.jpg', title: 'Technogym Geräte' },
              { img: 'img/power-plate.jpg', title: 'Powerplate' },
-             { img: 'img/solarium.jpg', title: 'Solarium' },
-             { img: 'img/freihantel.jpg', title: 'Sauna' },
-             { img: 'img/logo.png', title: 'Squash' },
-             { img: 'img/preis.jpg', title: 'Tennis' }
+             { img: 'img/solarium-tbb-1.jpg', title: 'Solarium' },
+             { img: 'img/sauna-1.jpg', title: 'Sauna' },
+             { img: 'img/squash-1.jpg', title: 'Squash' },
+             { img: 'img/tennis-1.jpg', title: 'Tennis' }
            ] 
          }" 
          x-init="setInterval(() => currentSlide = (currentSlide + 1) % slides.length, 3000)">
     <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>     
   <div class="max-w-7xl mx-auto">
     
-    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">Unsere Leistungen</h2>
+  <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">Unsere Leistungen</h2>
 
     <!-- Flex-Layout -->
     <div class="flex flex-col md:flex-row gap-8 md:items-stretch">
@@ -327,32 +259,110 @@
         ]" :key="i">
           <div class="border border-gray-700 rounded-xl overflow-hidden">
             <button @click="active === i ? active = null : active = i"
-                    class="w-full text-left px-6 py-4 flex justify-between items-center bg-white-800 hover:bg-gray-700">
+                    class="w-full text-left px-6 py-4 flex justify-between items-center bg-white-800 hover:bg-gray-200">
               <span class="font-medium" x-text="item.title"></span>
               <span class="text-xl font-bold" x-text="active === i ? '−' : '+'"></span>
             </button>
-            <div x-show="active === i" x-transition x-cloak class="px-6 pb-4 pt-2 text-gray-300 text-sm">
+            <div x-show="active === i" x-transition x-cloak class="px-6 pb-4 pt-2 text-black text-sm">
               <p x-text="item.content"></p>
             </div>
           </div>
         </template>
 
-        <!-- CTA Button -->
-        <div class="text-center md:text-left mt-6">
-          <a href="angebot.html"
-             class="inline-block bg-sky-300 text-black px-8 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
-            Angebot sichern
-          </a>
-        </div>
+  <!-- Öffne-Button -->
+  <div class="text-center my-8">
+<!-- Öffnet das Formular ohne Voreinstellung -->
+<button
+  @click="$store.popupForm.openWith()"
+  class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
+  Jetzt unverbindlich reservieren
+</button>
+  </div>
       </div>
     </div>
+  </div>
+</section>
+<section class="bg-white text-black py-16 px-4">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+
+    <!-- Linke Seite: Textinhalt -->
+    <div>
+      <h2 class="text-3xl font-extrabold mb-8 text-center md:text-left">
+        UNSER 9 WOCHEN BETREUUNGSKONZEPT
+      </h2>
+
+      <h3 class="text-lg font-semibold mb-6 text-sky-300">ABLAUF:</h3>
+
+      <div class="space-y-6">
+        <!-- Schritt 1 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-300 text-black font-bold flex items-center justify-center mr-4">1</div>
+          <p>
+            Nach einem Anamnese-Gespräch ermitteln wir Ihre individuellen Trainingsziele sowie Bedürfnisse und zeigen Ihnen die Trainingsmöglichkeiten auf, mit denen Sie Ihre Ziele schnell und effektiv erreichen werden.
+          </p>
+        </div>
+
+        <!-- Schritt 2 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-300 text-black font-bold flex items-center justify-center mr-4">2</div>
+          <p>
+            Wir führen einen Fitness Check mit Ihnen durch (Körperwertemessung, Krafttest, Ausdauertest) um Ihren aktuellen Trainingszustand zu ermitteln.
+          </p>
+        </div>
+
+        <!-- Schritt 3 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-300 text-black font-bold flex items-center justify-center mr-4">3</div>
+          <p>
+            Sie erhalten Ihren individuellen Trainingsplan für 10 Wochen.
+          </p>
+        </div>
+
+        <!-- Schritt 4 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-300 text-black font-bold flex items-center justify-center mr-4">4</div>
+          <p>
+            Gemeinsam passen wir dann Ihr Trainingsprogramm nach Ihren Wünschen weiter an. Persönliche Betreuung ist ein wesentlicher Bestandteil unseres Konzepts.
+          </p>
+        </div>
+
+        <!-- Schritt 5 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-300 text-black font-bold flex items-center justify-center mr-4">5</div>
+          <p>
+            Nach 9 Wochen führen wir einen Abschlusstest mit Ihnen durch. Ihre Daten werden ausgewertet, damit wir Ihren Trainingsfortschritt im Hinblick auf Ihr persönliches Trainingsziel immer im Blick behalten.
+          </p>
+        </div>
+
+        <!-- Schritt 6 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-300 text-black font-bold flex items-center justify-center mr-4">6</div>
+          <p>
+            Wir beurteilen zusammen mit Ihnen die bisher erreichten Ergebnisse und setzen durch neue Trainingsmethoden und -varianten neue Impulse für Ihr Trainingsprogramm.
+          </p>
+        </div>
+      </div>
+
+      <!-- Abschlusssatz -->
+      <p class="mt-8 text-gray">
+        Mit dieser Erfolgsbetreuung begleiten wir Sie dauerhaft während Ihrer gesamten Trainingszeit.
+      </p>
+    </div>
+
+    <!-- Rechte Seite: Platz für Bild oder Illustration -->
+    <div class="flex items-center justify-center">
+      <!-- Beispielbild (du kannst img/... durch dein eigenes Bild ersetzen) -->
+       <img src="img/mann_und_frau.png" alt="Mann und Frau">
+
+    </div>
+
   </div>
 </section>
 <!-- FAQ-Einträge -->
 <section class="bg-gray-100 text-black py-16 px-4" x-data="{ open: null }">
   <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
   <div class="max-w-3xl mx-auto">
-    <h2 class="text-3xl font-bold text-center mb-10">Häufig gestellte Fragen</h2>
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">Häufig gestellte Fragen</h2>
 
     
     <div class="space-y-4 text-black">
@@ -418,18 +428,22 @@
       </div>
     </div>
 
-    <!-- CTA-Button -->
-    <div class="text-center mt-10">
-      <a href="angebot.html"
-         class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
-        Jetzt starten
-      </a>
-    </div>
+  <!-- Öffne-Button -->
+  <div class="text-center my-8">
+<!-- Öffnet das Formular ohne Voreinstellung -->
+<button
+  @click="$store.popupForm.openWith()"
+  class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition">
+  Jetzt unverbindlich reservieren
+</button>
+  </div>
+  </div>
   </div>
 </section>
 <section class="bg-white text-black py-24 px-6">
-  <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-4xl md:text-5xl font-bold mb-16">Unser Team</h2>
+ <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">Unser Team</h2>
 
     <div class="grid gap-10 md:grid-cols-2">
 
@@ -440,16 +454,17 @@
 
         <!-- Inhalt unten -->
         <div class="p-6 text-center w-full">
-          <h3 class="text-xl font-bold">Salem El Osta</h3>
+          <h3 class="text-xl font-bold text-black">Salem El Osta</h3>
           <p class="text-sm text-gray-600 mb-4">Diplom Sportpädagoge & Fitnessökonomie B.A.</p>
 
-          <!-- Toggle Button -->
-          <button onclick="toggleAccordion(this)" class="text-sm font-semibold text-white‚ underline hover:text-gray-700 transition">
-            Qualifikationen anzeigen
-          </button>
+      <!-- Toggle Button -->
+<button onclick="toggleAccordion(this)" class="text-sm font-semibold text-black underline hover:text-gray-700 transition">
+  Qualifikationen anzeigen
+</button>
+
 
           <!-- Accordion -->
-          <div class="hidden mt-4 text-sm text-white text-center accordion-content ">
+          <div class="hidden mt-4 text-sm text-black text-center accordion-content ">
             <ul class="list-disc list-inside space-y-1">
               <li>Diplom Sportpädagogik</li>
               <li>Bachelor Fitnessökonomie</li>
@@ -475,7 +490,7 @@
 
         <!-- Inhalt unten -->
         <div class="p-6 text-center w-full">
-          <h3 class="text-xl font-bold">Tijana Vrajes</h3>
+          <h3 class="text-xl font-bold text-black">Tijana Vrajes</h3>
           <p class="text-sm text-gray-600 mb-4">Fitnesstrainerin und BA Studentin in Fitnessökonomie</p>
         </div>
       </div>
@@ -491,10 +506,10 @@
     const isVisible = !content.classList.contains("hidden");
 
     // Collapse all other accordions
-    document.querySelectorAll(".accordion-content").forEach(el => el.classList.add("hidden"));
-    document.querySelectorAll("button").forEach(btn => {
-      if (btn !== button) btn.textContent = "Qualifikationen anzeigen";
-    });
+   document.querySelectorAll(".accordion-toggle .label").forEach(lbl => {
+  if (lbl.closest("button") !== button) lbl.textContent = "Qualifikationen anzeigen";
+});
+
 
     // Toggle this one
     if (!isVisible) {
@@ -507,64 +522,58 @@
   }
 </script>
 
-<section class="bg-gray-100 text-black py-24 px-6">
-  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+<!-- Tennis Section -->
+<section class="bg-gray-100 text-black py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
+  <div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
 
     <!-- Text & Preistabelle -->
     <div>
-      <h2 class="text-4xl font-bold mb-8">Tennis</h2>
+      <h2 class="text-3xl sm:text-4xl font-bold mb-8">Tennis</h2>
 
       <!-- Einzelpreise -->
-      <div class="bg-white text-black rounded-2xl p-6 shadow-md mb-6">
+      <div class="bg-white text-black rounded-2xl p-6 shadow-md mb-6 w-full">
         <h3 class="text-xl font-semibold mb-4">Einzelpreise</h3>
-        <div class="grid grid-cols-3 gap-4 text-sm text-gray-800">
-          <div></div>
+        <div class="grid grid-cols-2 gap-3 text-sm text-gray-800">
           <div>10–16 Uhr</div>
+          <div class="text-right break-words">22,00 € (ohne Licht)</div>
           <div>16–21 Uhr</div>
-          <div>Preis</div>
-          <div>22,00 € (ohne Licht)</div>
-          <div>25,00 €</div>
+          <div class="text-right break-words">25,00 €</div>
         </div>
       </div>
 
       <!-- Winter-Abo -->
-      <div class="bg-white text-black rounded-2xl p-6 shadow-md mb-6">
+      <div class="bg-white text-black rounded-2xl p-6 shadow-md mb-6 w-full">
         <h3 class="text-xl font-semibold mb-4">Winter-Abonnement (30 Wochen)</h3>
-        <div class="grid grid-cols-3 gap-4 text-sm text-gray-800">
-          <div>Mo – Fr</div>
-          <div>550,00 €</div>
-          <div>650,00 €</div>
-          <div>Sa, So & Feiertage (10–15 Uhr)</div>
-          <div>650,00 €</div>
-          <div></div>
+        <div class="space-y-4 text-sm text-gray-800">
+          <div class="flex justify-between">
+            <span>Mo – Fr</span>
+            <span>550,00 € – 650,00 €</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Sa, So & Feiertage (10–15 Uhr)</span>
+            <span>650,00 €</span>
+          </div>
         </div>
       </div>
 
       <!-- Hinweis -->
-      <p class="text-sm text-gray-400 mt-4">
-        Von 10–16 Uhr bei Bedarf Lichtmarke lösen (3,00 €). <br />
+      <p class="text-sm text-gray-500 mt-4">
+        Von 10–16 Uhr bei Bedarf Lichtmarke lösen (3,00 €).<br />
         Von 16–21 Uhr inklusive.
       </p>
     </div>
 
     <!-- Bild-Slider -->
     <div class="w-full">
-      <div class="swiper rounded-2xl overflow-hidden shadow-lg">
+      <div class="swiper tennis-swiper rounded-2xl overflow-hidden shadow-lg mb-6 w-full">
         <div class="swiper-wrapper">
-          <!-- Slide 1 -->
           <div class="swiper-slide">
-            <img src="img/tennis1.jpg" alt="Tennisplatz 1" class="w-full h-80 object-cover" />
+            <img src="img/tennis-1.jpg" alt="Tennisplatz 1" class="w-full h-48 sm:h-64 md:h-80 object-cover" />
           </div>
-          <!-- Slide 2 -->
           <div class="swiper-slide">
-            <img src="img/tennis2.jpg" alt="Tennisplatz 2" class="w-full h-80 object-cover" />
-          </div>
-          <!-- Slide 3 -->
-          <div class="swiper-slide">
-            <img src="img/tennis3.jpg" alt="Tennishalle" class="w-full h-80 object-cover" />
+            <img src="img/tennis-2.jpg" alt="Tennisplatz 2" class="w-full h-48 sm:h-64 md:h-80 object-cover" />
           </div>
         </div>
-        <!-- Pagination -->
         <div class="swiper-pagination mt-2"></div>
       </div>
     </div>
@@ -573,54 +582,52 @@
 </section>
 
 
-<section class="bg-gray-100 text-black py-24 px-6">
-  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+<!-- Squash Section -->
+<section class="bg-white text-black py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
 
     <!-- Text & Preise -->
     <div>
-      <h2 class="text-4xl font-bold mb-8">Squash</h2>
+      <h2 class="text-3xl sm:text-4xl font-bold mb-8">Squash</h2>
 
-      <!-- Einleitungstext -->
-      <p class="text-sm text-black-300 mb-6 leading-relaxed">
+      <p class="text-sm text-gray-700 mb-6 leading-relaxed">
         Wenn Sie schon immer einmal um sich schlagen wollten, dann haben Sie die Gelegenheit, dies im EL OSTA GYM während einer Runde Squash zu tun.
         Die Regeln dieser dynamischen und sehr beliebten Sportart sind schnell gelernt, und selbst absolute Anfänger haben schon nach wenigen Minuten Spaß am Spiel.
       </p>
-      <p class="text-sm text-black-300 mb-10 leading-relaxed">
+      <p class="text-sm text-gray-700 mb-10 leading-relaxed">
         Sollten Sie noch keine eigene Ausrüstung besitzen, stehen Ihnen selbstverständlich auch Leihschläger gegen eine Gebühr von <strong>4,00 €</strong> zur Verfügung.
       </p>
 
-      <!-- Preise Card -->
-      <div class="bg-white text-black rounded-2xl p-6 shadow-md max-w-md">
+      <div class="bg-white text-black rounded-2xl p-6 shadow-md mb-6 w-full">
         <h3 class="text-xl font-semibold mb-4">Preise</h3>
-        <div class="grid grid-cols-2 gap-4 text-sm text-gray-800">
-          <div>1 Stunde</div>
-          <div>16,00 €</div>
-          <div>Leihschläger</div>
-          <div>4,00 €</div>
-          <div>Leihball</div>
-          <div>1,50 €</div>
+        <div class="space-y-3 text-sm text-gray-800">
+          <div class="flex justify-between">
+            <span>1 Stunde</span>
+            <span>16,00 €</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Leihschläger</span>
+            <span>4,00 €</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Leihball</span>
+            <span>1,50 €</span>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Bild-Slider -->
     <div class="w-full">
-      <div class="swiper rounded-2xl overflow-hidden shadow-lg">
+      <div class="swiper squash-swiper rounded-2xl overflow-hidden shadow-lg mb-6 w-full">
         <div class="swiper-wrapper">
-          <!-- Slide 1 -->
           <div class="swiper-slide">
-            <img src="img/squash1.jpg" alt="Squash Court" class="w-full h-80 object-cover" />
+            <img src="img/squash-1.jpg" alt="Squash Court" class="w-full h-48 sm:h-64 md:h-80 object-cover" />
           </div>
-          <!-- Slide 2 -->
           <div class="swiper-slide">
-            <img src="img/squash2.jpg" alt="Squash Spieler" class="w-full h-80 object-cover" />
-          </div>
-          <!-- Slide 3 -->
-          <div class="swiper-slide">
-            <img src="img/squash3.jpg" alt="Squash Spielszene" class="w-full h-80 object-cover" />
+            <img src="img/squash-2.jpg" alt="Squash Spieler" class="w-full h-48 sm:h-64 md:h-80 object-cover" />
           </div>
         </div>
-        <!-- Pagination -->
         <div class="swiper-pagination mt-2"></div>
       </div>
     </div>
@@ -629,54 +636,53 @@
 </section>
 
 
-<section class="bg-white text-black py-24 px-6">
+<!-- Sauna & Solarium Section -->
+<section class="bg-gray-100 text-black py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
   <div class="max-w-7xl mx-auto text-center mb-16">
-   <h2 class="text-4xl font-bold mb-8">Sauna und Solarium</h2>
+    <h2 class="text-3xl sm:text-4xl font-bold mb-8">Sauna und Solarium</h2>
   </div>
 
-  <div class="grid md:grid-cols-2 gap-12 max-w-7xl mx-auto">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-7xl mx-auto">
 
-    <!-- Solarium (links) -->
-    <div class="flex flex-col items-center text-center gap-6">
-      <!-- Solarium Slider -->
+    <!-- Solarium -->
+    <div class="flex flex-col items-center text-center gap-6 mb-6 w-full">
       <div class="w-full swiper solarium-swiper rounded-xl overflow-hidden shadow-lg">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="img/solarium1.jpg" alt="Solarium 1" class="w-full h-72 object-cover" />
-          </div>
-          <div class="swiper-slide">
-            <img src="img/solarium2.jpg" alt="Solarium 2" class="w-full h-72 object-cover" />
-          </div>
+          <div class="swiper-slide"><img src="img/solarium-tbb-1.jpg" alt="Solarium 1" class="w-full h-48 sm:h-64 md:h-72 object-cover" /></div>
+          <div class="swiper-slide"><img src="img/solarium-tbb-2.jpg" alt="Solarium 2" class="w-full h-48 sm:h-64 md:h-72 object-cover" /></div>
+          <div class="swiper-slide"><img src="img/solarium-tbb-3.jpg" alt="Solarium 3" class="w-full h-48 sm:h-64 md:h-72 object-cover" /></div>
+          <div class="swiper-slide"><img src="img/solarium-tbb-4.jpg" alt="Solarium 4" class="w-full h-48 sm:h-64 md:h-72 object-cover" /></div>
         </div>
         <div class="swiper-pagination mt-2"></div>
       </div>
 
       <div>
-        <h3 class="text-2xl font-bold text-gray-400 uppercase tracking-widest mb-2">Solarium</h3>
-        <p class="text-sm text-gray-300 leading-relaxed max-w-sm mx-auto">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-600 uppercase tracking-widest mb-2">Solarium</h3>
+        <p class="text-sm text-gray-600 leading-relaxed max-w-sm mx-auto">
           Unsere Sonnenbänke können selbstverständlich auch von Nicht-Mitgliedern genutzt werden.
         </p>
       </div>
     </div>
 
-    <!-- Sauna (rechts) -->
-    <div class="flex flex-col items-center text-center gap-6">
-      <!-- Sauna Slider -->
+    <!-- Sauna -->
+    <div class="flex flex-col items-center text-center gap-6 mb-6 w-full">
       <div class="w-full swiper sauna-swiper rounded-xl overflow-hidden shadow-lg">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="img/sauna1.jpg" alt="Sauna 1" class="w-full h-72 object-cover" />
-          </div>
-          <div class="swiper-slide">
-            <img src="img/sauna2.jpg" alt="Sauna 2" class="w-full h-72 object-cover" />
-          </div>
+          <div class="swiper-slide"><img src="img/sauna-1.jpg" alt="Sauna 1" class="w-full h-48 sm:h-64 md:h-72 object-cover" /></div>
+          <div class="swiper-slide"><img src="img/sauna-2.jpg" alt="Sauna 2" class="w-full h-48 sm:h-64 md:h-72 object-cover" /></div>
+          <div class="swiper-slide"><img src="img/sauna-3.jpg" alt="Sauna 3" class="w-full h-48 sm:h-64 md:h-72 object-cover" /></div>
+          <div class="swiper-slide"><img src="img/sauna-4.jpg" alt="Sauna 4" class="w-full h-48 sm:h-64 md:h-72 object-cover" /></div>
+          <div class="swiper-slide"><img src="img/sauna-5.jpg" alt="Sauna 5" class="w-full h-48 sm:h-64 md:h-72 object-cover" /></div>
+          <div class="swiper-slide"><img src="img/sauna-6.jpg" alt="Sauna 6" class="w-full h-48 sm:h-64 md:h-72 object-cover" /></div>
+          <div class="swiper-slide"><img src="img/sauna-7.jpg" alt="Sauna 7" class="w-full h-48 sm:h-64 md:h-72 object-cover" /></div>
+          <div class="swiper-slide"><img src="img/sauna-8.jpg" alt="Sauna 8" class="w-full h-48 sm:h-64 md:h-72 object-cover" /></div>
         </div>
         <div class="swiper-pagination mt-2"></div>
       </div>
 
       <div>
-        <h3 class="text-2xl font-bold text-gray-400 uppercase tracking-widest mb-2">Sauna</h3>
-        <p class="text-sm text-gray-300 leading-relaxed max-w-sm mx-auto">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-600 uppercase tracking-widest mb-2">Sauna</h3>
+        <p class="text-sm text-gray-600 leading-relaxed max-w-sm mx-auto">
           Unsere Sauna ist exklusiv und gratis nur für unsere Mitglieder.
         </p>
       </div>
@@ -685,12 +691,33 @@
   </div>
 </section>
 
-<!-- SwiperJS CSS & JS (nur einmal pro Seite nötig) -->
+<!-- SwiperJS CSS & JS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<!-- SwiperJS Initialisierung -->
 <script>
+  new Swiper('.tennis-swiper', {
+    loop: true,
+    pagination: {
+      el: '.tennis-swiper .swiper-pagination',
+      clickable: true,
+    },
+    autoplay: {
+      delay: 4000,
+    },
+  });
+
+  new Swiper('.squash-swiper', {
+    loop: true,
+    pagination: {
+      el: '.squash-swiper .swiper-pagination',
+      clickable: true,
+    },
+    autoplay: {
+      delay: 4000,
+    },
+  });
+
   new Swiper('.solarium-swiper', {
     loop: true,
     pagination: {
@@ -720,24 +747,25 @@
 
 
 
+
 <!-- Bilder-Slider-Sektion -->
 <!-- Bildergalerie-Slider -->
 <section class="bg-gray-100 text-black py-16 px-4"
          x-data="{ 
            current: 0, 
            images: [
-             'img/freihantel.jpg', 
-             'img/solarium.jpg', 
-             'img/power-platt.jpg', 
-             'img/Ausdauer.jpg', 
-             'img/Selection-pro.jpg'
+             'img/tbb-1.jpg', 
+             'img/tbb-2.jpg', 
+             'img/tbb-3.jpg', 
+             'img/tbb-5.jpg', 
+             'img/tbb-6.jpg'
            ] 
          }">
   
   <div class="max-w-7xl mx-auto">
 <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
     <!-- ✅ Überschrift -->
-    <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">
       Dein EL OSTA GYM in Tauberbischofsheim
     </h2>
 
@@ -788,62 +816,19 @@
   </div>
 </section>
 
-
-<section class="bg-white py-16 px-6">
+<!-- Das sagen unsere Mitglieder -->
+ <section class="bg-white py-16 px-6">
   <div class="w-[100px] h-px bg-black my-12 mx-auto"></div>
   <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-black mb-10">Das sagen unsere Mitglieder</h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-
-      <!-- Bewertung 1 -->
-      <div class="bg-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg transition">
-        <div class="flex items-center mb-4">
-          <img src="https://via.placeholder.com/60" alt="Profilbild" class="w-12 h-12 rounded-full mr-4">
-          <div>
-            <p class="font-semibold text-gray-800">Lisa M.</p>
-            <p class="text-sm text-gray-500">vor 1 Woche</p>
-          </div>
-        </div>
-        <div class="flex items-center text-yellow-400 mb-2">
-          ★★★★★
-        </div>
-        <p class="text-gray-700 text-sm">Top Studio! Die Trainer sind super freundlich und ich fühle mich rundum wohl.</p>
-      </div>
-
-      <!-- Bewertung 2 -->
-      <div class="bg-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg transition">
-        <div class="flex items-center mb-4">
-          <img src="https://via.placeholder.com/60" alt="Profilbild" class="w-12 h-12 rounded-full mr-4">
-          <div>
-            <p class="font-semibold text-gray-800">Sebastian K.</p>
-            <p class="text-sm text-gray-500">vor 2 Wochen</p>
-          </div>
-        </div>
-        <div class="flex items-center text-yellow-400 mb-2">
-          ★★★★★
-        </div>
-        <p class="text-gray-700 text-sm">Super Geräte und das 9-Wochen-Betreuungskonzept ist Gold wert!</p>
-      </div>
-
-      <!-- Bewertung 3 -->
-      <div class="bg-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg transition">
-        <div class="flex items-center mb-4">
-          <img src="https://via.placeholder.com/60" alt="Profilbild" class="w-12 h-12 rounded-full mr-4">
-          <div>
-            <p class="font-semibold text-gray-800">Maik K.</p>
-            <p class="text-sm text-gray-500">vor 4 Tagen</p>
-          </div>
-        </div>
-        <div class="flex items-center text-yellow-400 mb-2">
-          ★★★★★
-        </div>
-        <p class="text-gray-700 text-sm">Modernes Studio mit Power Plate, Solarium und toller Atmosphäre!</p>
-      </div>
-
-    </div>
-  </div>
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">
+      Das sagen unsere Mitglieder.
+    </h2>
+<!-- Elfsight Google Reviews | Untitled Google Reviews -->
+<script src="https://static.elfsight.com/platform/platform.js" async></script>
+<div class="elfsight-app-e3a8e9d2-0f12-47b5-96e6-be5fd3286059" data-elfsight-app-lazy></div>
+ </div>
 </section>
+
 <!-- SwiperJS Initialisierung (nur einmal pro Seite nötig!) -->
 <script>
   const swiper = new Swiper('.swiper', {
@@ -860,33 +845,125 @@
 
 
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 py-6 px-4 text-sm text-gray-400">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-  <!-- Rechte Seite: Copyright + Made by -->
-    <div class="text-left">
-      <p>&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
-      <p class="text-xs mt-1">Made by Maik</p>
-    </div>
-        <div class="flex-shrink-0">
+<!-- Footer -->
+<footer class="bg-white pt-6 pb-6 px-4 text-xs text-black">
+  <div class="max-w-7xl mx-auto w-full flex flex-col items-center gap-6">
+
+    <!-- Horizontale Linie -->
+    <hr class="w-full border-t border-gray-300">
+
+    <!-- El Osta Logo: zentriert -->
+    <div class="flex justify-center items-center">
       <a href="index.html">
         <img src="img/el_osta_logo.jpg" alt="El Osta Logo" class="h-16 w-auto">
       </a>
     </div>
-    <!-- Linke Seite: Menü -->
-    <div class="space-y-2 md:space-y-0 md:space-x-6 md:flex">
-      <a href="impressum.html" class="block hover:text-white">Impressum</a>
-      <a href="datenschutz.html" class="block hover:text-white">Datenschutz</a>
-      <a href="mitgliedschaft.html" class="block hover:text-white">Mitgliedschaft verwalten</a>
+
+    <!-- Footer-Inhalt: responsive Layout -->
+    <div class="w-full flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+
+      <!-- Linke Seite: Copyright + Made by -->
+      <div class="z-10">
+        <p class="flex justify-center md:justify-start items-center">
+          Made by
+          <a href="https://fitrada.de" target="_blank" class="ml-2">
+            <img src="img/fitrada_logo.png" alt="fitrada_logo" class="h-16 inline">
+          </a>
+        </p>
+        <p class="mt-1">&copy; 2025 El Osta GYM – Alle Rechte vorbehalten.</p>
+        <div class="mt-1">
+       <a href="https://www.facebook.com/elostagym.tauberbischofsheim/" target="_blank" class="mr-2 text-xl hover:text-blue-600">
+            <i class="fab fa-facebook-square"></i>
+          </a>
+          <a href="https://www.instagram.com/elostagym.tauberbischofsheim" target="_blank" class="text-xl hover:text-pink-500">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Rechte Seite: Button + Menü -->
+      <div class="flex flex-col items-center md:items-end space-y-4 z-10">
+
+        <!-- Button -->
+        <a href="probetraining.html" class="inline-block bg-sky-300 text-black px-8 py-4 rounded-xl font-semibold hover:bg-sky-200 transition">
+          Jetzt Probetraining beantragen
+        </a>
+
+        <!-- Menü -->
+        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-base">
+          <a href="impressum.html" class="hover:text-gray-700">Impressum</a>
+          <a href="datenschutz.html" class="hover:text-gray-700">Datenschutz</a>
+          <a href="mitgliedschaft.html" class="hover:text-gray-700">Mitgliedschaft verwalten</a>
+        </div>
+
+      </div>
+
     </div>
-
-  
-
   </div>
 </footer>
+<!-- Zurück nach oben Button mit Icon -->
+<button onclick="scrollToTop()"
+        class="fixed bottom-4 right-4 z-50 bg-white/80 hover:bg-white text-black border border-black rounded-full p-3 shadow-lg backdrop-blur transition-all"
+        id="backToTopBtn"
+        aria-label="Nach oben scrollen">
+  <!-- Heroicon: Chevron Up -->
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+       stroke-width="2" stroke="currentColor" class="w-5 h-5">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+  </svg>
+</button>
+<!-- Popup-Formular -->
+<div x-data
+     x-show="$store.popupForm.open" x-cloak
+     x-cloak
+     @keydown.escape.window="$store.popupForm.close()"
+     class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+     x-transition>
+  <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 relative">
+    <!-- Schließen -->
+    <button @click="$store.popupForm.close()"
+            class="absolute top-3 right-4 text-gray-500 hover:text-black text-2xl font-bold">&times;</button>
 
+    <h2 class="text-2xl font-bold mb-6 text-center text-black">
+      Wir reservieren dir ein Angebot völlig unverbindlich!
+    </h2>
 
+    <form action="kontakt.php" method="POST" class="space-y-4 text-black">
+      <input type="text" name="vorname" placeholder="Vorname" required
+             class="w-full border border-gray-300 rounded-lg px-4 py-2">
+      <input type="text" name="nachname" placeholder="Nachname" required
+             class="w-full border border-gray-300 rounded-lg px-4 py-2">
+      <input type="tel" name="telefon" placeholder="Telefonnummer" required
+             class="w-full border border-gray-300 rounded-lg px-4 py-2">
+      <input type="email" name="email" placeholder="E-Mail" required
+             class="w-full border border-gray-300 rounded-lg px-4 py-2">
 
+      <!-- Standort aus Store befüllen (optional) -->
+      <select name="standort" required x-model="$store.popupForm.data.standort"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2">
+        <option value="" disabled :selected="!$store.popupForm.data.standort">Bevorzugter Standort wählen</option>
+        <option value="Tauberbischofsheim">Tauberbischofsheim</option>
+        <option value="Lauda-Königshofen">Lauda-Königshofen</option>
+      </select>
 
+      <div class="flex items-start gap-3">
+        <input id="dsgvo" name="dsgvo" type="checkbox" required
+               class="mt-1 h-4 w-4 border-gray-300 rounded">
+        <label for="dsgvo" class="text-sm leading-6">
+          Ich stimme der Verarbeitung meiner Daten,
+          <span class="whitespace-nowrap">
+            gemäß der <a href="datenschutz.html"
+                         class="underline text-sky-600 hover:text-sky-800 inline">Datenschutzerklärung</a> zu.
+          </span>
+        </label>
+      </div>
+
+      <button type="submit"
+              class="bg-sky-300 text-black px-6 py-3 rounded-xl font-semibold hover:bg-sky-200 transition w-full">
+        Weiter
+      </button>
+    </form>
+  </div>
+</div>
 </body>
 </html>
